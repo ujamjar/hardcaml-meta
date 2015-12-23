@@ -1,0 +1,6 @@
+S src
+S ini2core
+B _build/**
+PKG hardcaml
+PKG atdgen
+PKG yojson

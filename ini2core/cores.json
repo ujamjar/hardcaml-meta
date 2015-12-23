@@ -1,0 +1,1874 @@
+{
+  "main": {
+    "description": "\"Micron 256Mb DDR-SDRAM Verilog model\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/mt46v16m16p/mt46v16m16p.core", 
+  "verilog": {
+    "include_files": [
+      "ddr_parameters.vh"
+    ], 
+    "src_files": [
+      "ddr.v"
+    ]
+  }, 
+  "provider": {
+    "url": "http://www.micron.com/~/media/Documents/Products/Sim%%20Model/DRAM/DRAM/3924256Mb_ddr.zip", 
+    "filetype": "zip", 
+    "name": "url"
+  }
+}
+{
+  "main": {
+    "description": "Wishbone boot ROM component and a collection of basic boot loaders for OpenRISC 1000"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/or1k_bootloaders/or1k_bootloaders-0.9.core", 
+  "verilog": {
+    "include_files": [
+      "boot_loop.vh", 
+      "clear_r3_and_jump_to_0x100.vh", 
+      "led_blink.vh", 
+      "spi_uimage_loader.vh"
+    ], 
+    "src_files": [
+      "wb_bootrom.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "or1k_bootloaders", 
+    "version": "v0.9", 
+    "name": "github", 
+    "user": "olofk"
+  }
+}
+{
+  "main": {
+    "simulators": [
+      "icarus"
+    ], 
+    "depend": [
+      "csrbrg"
+    ], 
+    "description": "\"minimalistic ethernet MAC\""
+  }, 
+  "provider": {
+    "repo": "milkymist", 
+    "version": "7d944d3dcffb5e528a44937b10123ff65a0aecbc", 
+    "name": "github", 
+    "user": "m-labs"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/minimac2/minimac2.core", 
+  "verilog": {
+    "tb_private_src_files": [
+      "cores/minimac2/test/RAMB16BWER.v", 
+      "cores/minimac2/test/tb_minimac.v"
+    ], 
+    "src_files": [
+      "cores/minimac2/rtl/minimac2.v", 
+      "cores/minimac2/rtl/minimac2_ctlif.v", 
+      "cores/minimac2/rtl/minimac2_memory.v", 
+      "cores/minimac2/rtl/minimac2_psync.v", 
+      "cores/minimac2/rtl/minimac2_rx.v", 
+      "cores/minimac2/rtl/minimac2_sync.v", 
+      "cores/minimac2/rtl/minimac2_tx.v"
+    ]
+  }, 
+  "simulator": {
+    "toplevel": "tb_minimac"
+  }
+}
+{
+  "main": {
+    "description": "Device Independent Integrated Logic Analyzer"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/diila/diila.core", 
+  "verilog": {
+    "src_files": [
+      "rtl/verilog/diila.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "diila", 
+    "name": "github", 
+    "branch": "master", 
+    "user": "skristiansson"
+  }
+}
+{
+  "main": {
+    "description": "\"OpenCores VGA/LCD Controller core\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/vga_lcd/vga_lcd.core", 
+  "verilog": {
+    "include_files": [
+      "vga_defines.v"
+    ], 
+    "src_files": [
+      "generic_dpram.v", 
+      "generic_spram.v", 
+      "timescale.v", 
+      "vga_clkgen.v", 
+      "vga_colproc.v", 
+      "vga_csm_pb.v", 
+      "vga_cur_cregs.v", 
+      "vga_curproc.v", 
+      "vga_enh_top.v", 
+      "vga_fifo_dc.v", 
+      "vga_fifo.v", 
+      "vga_pgen.v", 
+      "vga_tgen.v", 
+      "vga_vtim.v", 
+      "vga_wb_master.v", 
+      "vga_wb_slave.v"
+    ]
+  }, 
+  "provider": {
+    "repo_root": "trunk/rtl/verilog", 
+    "revision": "64", 
+    "name": "opencores", 
+    "repo_name": "vga_lcd"
+  }
+}
+{
+  "main": {
+    "description": "Advanced Debug System wrapper for altera virtual jtag"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/altera_virtual_jtag/altera_virtual_jtag.core", 
+  "verilog": {
+    "src_files": [
+      "altera_virtual_jtag.v"
+    ]
+  }
+}
+{
+  "simulator": {
+    "toplevel": "wb_intercon_tb"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_intercon/wb_intercon-1.0.core", 
+  "modelsim": {
+    "depend": [
+      "vlog_tb_utils", 
+      "wb_bfm"
+    ]
+  }, 
+  "provider": {
+    "repo": "wb_intercon", 
+    "version": "v1.0", 
+    "name": "github", 
+    "user": "olofk"
+  }, 
+  "verilog": {
+    "tb_private_src_files": [
+      "bench/wb_mux_tb.v", 
+      "bench/wb_arbiter_tb.v", 
+      "bench/wb_upsizer_tb.v", 
+      "bench/wb_intercon_tb.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/wb_arbiter.v", 
+      "rtl/verilog/wb_data_resize.v", 
+      "rtl/verilog/wb_upsizer.v", 
+      "rtl/verilog/wb_mux.v"
+    ]
+  }, 
+  "plusargs": {
+    "transactions": [
+      "int", 
+      "Number", 
+      "of", 
+      "wishbone", 
+      "transactions", 
+      "to", 
+      "run", 
+      "in", 
+      "test", 
+      "bench"
+    ]
+  }, 
+  "main": {
+    "simulators": [
+      "icarus", 
+      "modelsim"
+    ], 
+    "depend": [
+      "verilog-arbiter-r1", 
+      "verilog_utils", 
+      "wb_common"
+    ], 
+    "description": "Wishbone Bus Interconnect utilities"
+  }, 
+  "icarus": {
+    "depend": [
+      "vlog_tb_utils", 
+      "wb_bfm"
+    ]
+  }
+}
+{
+  "main": {
+    "simulators": [
+      "icarus", 
+      "modelsim"
+    ], 
+    "depend": [
+      "verilog-arbiter", 
+      "verilog_utils", 
+      "vlog_tb_utils", 
+      "wb_bfm"
+    ], 
+    "description": "Wishbone Bus Interconnect utilities"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_intercon/wb_intercon.core", 
+  "verilog": {
+    "tb_private_src_files": [
+      "bench/wb_mux_tb.v", 
+      "bench/wb_arbiter_tb.v", 
+      "bench/orpsoc_tb.v"
+    ], 
+    "src_files": [
+      "wb_arbiter.v", 
+      "wb_data_resize.v", 
+      "wb_mux.v"
+    ]
+  }, 
+  "plusargs": {
+    "transactions": [
+      "int", 
+      "\"Number", 
+      "of", 
+      "wishbone", 
+      "transactions", 
+      "to", 
+      "run", 
+      "in", 
+      "test", 
+      "bench\""
+    ]
+  }
+}
+{
+  "simulator": {
+    "toplevel": "wb_sdram_ctrl_tb"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_sdram_ctrl/wb_sdram_ctrl.core", 
+  "modelsim": {
+    "vsim_options": [
+      "-t", 
+      "1ps"
+    ], 
+    "depend": [
+      "mt48lc16m16a2", 
+      "vlog_tb_utils", 
+      "wb_bfm"
+    ]
+  }, 
+  "provider": {
+    "repo": "wb_sdram_ctrl", 
+    "name": "github", 
+    "branch": "master", 
+    "user": "skristiansson"
+  }, 
+  "verilog": {
+    "tb_private_src_files": [
+      "bench/wb_sdram_ctrl_tb.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/wb_port_arbiter.v", 
+      "rtl/verilog/bufram.v", 
+      "rtl/verilog/dpram_altera.v", 
+      "rtl/verilog/dpram_generic.v", 
+      "rtl/verilog/dual_clock_fifo.v", 
+      "rtl/verilog/sdram_ctrl.v", 
+      "rtl/verilog/wb_port.v", 
+      "rtl/verilog/wb_sdram_ctrl.v"
+    ]
+  }, 
+  "plusargs": {
+    "transactions": [
+      "int", 
+      "\"Number", 
+      "of", 
+      "wishbone", 
+      "transactions\""
+    ]
+  }, 
+  "main": {
+    "simulators": [
+      "icarus"
+    ], 
+    "description": "\"SDRAM controller with multiple wishbone slave ports\""
+  }, 
+  "icarus": {
+    "depend": [
+      "mt48lc16m16a2", 
+      "vlog_tb_utils", 
+      "wb_bfm"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "Debug interface GDB server"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/jp_vpi/jp_vpi.core", 
+  "vpi": {
+    "include_files": [
+      "c/gdb.h", 
+      "c/rsp-rtl_sim.h", 
+      "c/rsp-vpi.h"
+    ], 
+    "src_files": [
+      "c/jp_vpi.c", 
+      "c/rsp-rtl_sim.c", 
+      "c/gdb.c"
+    ]
+  }, 
+  "verilog": {
+    "tb_src_files": [
+      "verilog/vpi_debug_module.v"
+    ]
+  }
+}
+{
+  "plusargs": {
+    "jtag-vpi-enable": [
+      "bool", 
+      "\"Enable", 
+      "JTAG", 
+      "debug", 
+      "interface\""
+    ]
+  }, 
+  "core_file": "../../orpsoc-cores/cores/jtag_vpi/jtag_vpi.core", 
+  "verilog": {
+    "tb_src_files": [
+      "jtag_vpi.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "jtag_vpi", 
+    "name": "github", 
+    "branch": "master", 
+    "user": "fjullien"
+  }, 
+  "main": {
+    "description": "\"TCP/IP controlled VPI JTAG Interface\""
+  }, 
+  "vpi": {
+    "src_files": [
+      "jtag_vpi.c"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "\"Simple UART from the Milkymist project\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/mmuart/mmuart.core", 
+  "verilog": {
+    "src_files": [
+      "uart_transceiver.v"
+    ]
+  }, 
+  "provider": {
+    "url": "https://github.com/m-labs/milkymist/raw/master/cores/uart/rtl/uart_transceiver.v", 
+    "filetype": "simple", 
+    "name": "url"
+  }
+}
+{
+  "main": {
+    "description": "Simple 8-bit gpio core"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/gpio/gpio.core", 
+  "verilog": {
+    "src_files": [
+      "gpio.v"
+    ]
+  }
+}
+{
+  "main": {
+    "simulators": [
+      "icarus", 
+      "modelsim"
+    ], 
+    "description": "Ethernet MAC 10/100 Mbps"
+  }, 
+  "provider": {
+    "repo_root": "trunk", 
+    "revision": "368", 
+    "name": "opencores", 
+    "repo_name": "ethmac"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/ethmac/ethmac.core", 
+  "verilog": {
+    "include_files": [
+      "rtl/verilog/timescale.v"
+    ], 
+    "tb_include_files": [
+      "bench/verilog/tb_eth_defines.v"
+    ], 
+    "tb_private_src_files": [
+      "bench/verilog/eth_host.v", 
+      "bench/verilog/eth_memory.v", 
+      "bench/verilog/eth_phy.v", 
+      "bench/verilog/eth_phy_defines.v", 
+      "bench/verilog/tb_cop.v", 
+      "bench/verilog/tb_ethernet.v", 
+      "bench/verilog/tb_ethernet_with_cop.v", 
+      "bench/verilog/wb_bus_mon.v", 
+      "bench/verilog/wb_master32.v", 
+      "bench/verilog/wb_master_behavioral.v", 
+      "bench/verilog/wb_model_defines.v", 
+      "bench/verilog/wb_slave_behavioral.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/eth_clockgen.v", 
+      "rtl/verilog/eth_cop.v", 
+      "rtl/verilog/eth_crc.v", 
+      "rtl/verilog/eth_fifo.v", 
+      "rtl/verilog/eth_maccontrol.v", 
+      "rtl/verilog/eth_macstatus.v", 
+      "rtl/verilog/eth_miim.v", 
+      "rtl/verilog/eth_outputcontrol.v", 
+      "rtl/verilog/eth_random.v", 
+      "rtl/verilog/eth_receivecontrol.v", 
+      "rtl/verilog/eth_register.v", 
+      "rtl/verilog/eth_registers.v", 
+      "rtl/verilog/eth_rxaddrcheck.v", 
+      "rtl/verilog/eth_rxcounters.v", 
+      "rtl/verilog/eth_rxethmac.v", 
+      "rtl/verilog/eth_rxstatem.v", 
+      "rtl/verilog/eth_shiftreg.v", 
+      "rtl/verilog/eth_spram_256x32.v", 
+      "rtl/verilog/eth_top.v", 
+      "rtl/verilog/eth_transmitcontrol.v", 
+      "rtl/verilog/eth_txcounters.v", 
+      "rtl/verilog/eth_txethmac.v", 
+      "rtl/verilog/eth_txstatem.v", 
+      "rtl/verilog/eth_wishbone.v", 
+      "rtl/verilog/ethmac.v", 
+      "rtl/verilog/ethmac_defines.v", 
+      "rtl/verilog/xilinx_dist_ram_16x32.v"
+    ]
+  }, 
+  "simulator": {
+    "toplevel": "tb_ethernet"
+  }
+}
+{
+  "main": {
+    "description": "\"Verilog test bench utility functions\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/vlog_tb_utils/vlog_tb_utils.core", 
+  "verilog": {
+    "tb_src_files": [
+      "vlog_functions.v", 
+      "vlog_tb_utils.v"
+    ]
+  }, 
+  "plusargs": {
+    "testcase": [
+      "str", 
+      "Name", 
+      "of", 
+      "testcase", 
+      "(Used", 
+      "for", 
+      "VCD", 
+      "filename)"
+    ], 
+    "heartbeat": [
+      "int", 
+      "Display", 
+      "a", 
+      "heartbeat", 
+      "message", 
+      "every", 
+      "n*heartbeat"
+    ], 
+    "vcd": [
+      "bool", 
+      "\"Enable", 
+      "VCD", 
+      "logging\""
+    ], 
+    "timeout": [
+      "int", 
+      "\"Abort", 
+      "test", 
+      "case", 
+      "after", 
+      "n", 
+      "cycles\""
+    ]
+  }
+}
+{
+  "plusargs": {
+    "read_rate": [
+      "str", 
+      "FIFO", 
+      "read", 
+      "rate"
+    ], 
+    "write_rate": [
+      "str", 
+      "FIFO", 
+      "write", 
+      "rate"
+    ]
+  }, 
+  "simulator": {
+    "toplevel": "fifo_tb"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/fifo/fifo-1.0.core", 
+  "verilog": {
+    "tb_private_src_files": [
+      "bench/fifo_tb.v"
+    ], 
+    "tb_src_files": [
+      "bench/fifo_reader.v", 
+      "bench/fifo_writer.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/simple_dpram_sclk.v", 
+      "rtl/verilog/fifo.v", 
+      "rtl/verilog/fifo_fwft_adapter.v", 
+      "rtl/verilog/fifo_fwft.v", 
+      "rtl/verilog/dual_clock_fifo.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "fifo", 
+    "version": "v1.0", 
+    "name": "github", 
+    "user": "olofk"
+  }, 
+  "main": {
+    "simulators": [
+      "icarus", 
+      "modelsim"
+    ], 
+    "depend": [
+      "vlog_tb_utils"
+    ], 
+    "description": "Generic FIFO"
+  }
+}
+{
+  "main": {
+    "description": "\"OpenCores I2C Controller core (with slave additions)\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/i2c/i2c.core", 
+  "verilog": {
+    "include_files": [
+      "rtl/verilog/i2c_master_defines.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/i2c_master_bit_ctrl.v", 
+      "rtl/verilog/i2c_master_byte_ctrl.v", 
+      "rtl/verilog/i2c_master_top.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "i2c", 
+    "version": "c9ce7774fca8f4538dcdc13160ba5f1e8616369c", 
+    "name": "github", 
+    "user": "olofk"
+  }
+}
+{
+  "main": {
+    "description": "\"OpenCores AC97 Controller core\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/ac97/ac97.core", 
+  "verilog": {
+    "include_files": [
+      "ac97_defines.v"
+    ], 
+    "src_files": [
+      "ac97_cra.v", 
+      "ac97_dma_if.v", 
+      "ac97_dma_req.v", 
+      "ac97_fifo_ctrl.v", 
+      "ac97_in_fifo.v", 
+      "ac97_int.v", 
+      "ac97_out_fifo.v", 
+      "ac97_prc.v", 
+      "ac97_rf.v", 
+      "ac97_rst.v", 
+      "ac97_sin.v", 
+      "ac97_soc.v", 
+      "ac97_sout.v", 
+      "ac97_top.v", 
+      "ac97_wb_if.v"
+    ]
+  }, 
+  "provider": {
+    "repo_root": "trunk/rtl/verilog", 
+    "revision": "21", 
+    "name": "opencores", 
+    "repo_name": "ac97"
+  }
+}
+{
+  "simulator": {
+    "toplevel": "stream_dual_clock_fifo_tb"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/stream_utils/stream_utils-1.0.core", 
+  "modelsim": {
+    "depend": [
+      "vlog_tb_utils"
+    ]
+  }, 
+  "provider": {
+    "repo": "stream_utils", 
+    "version": "v1.0", 
+    "name": "github", 
+    "user": "olofk"
+  }, 
+  "verilog": {
+    "tb_private_src_files": [
+      "bench/stream_upsizer_tb.v", 
+      "bench/stream_downsizer_tb.v", 
+      "bench/stream_dual_clock_fifo_tb.v"
+    ], 
+    "tb_src_files": [
+      "bench/stream_writer.v", 
+      "bench/stream_reader.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/stream_upsizer.v", 
+      "rtl/verilog/stream_downsizer.v", 
+      "rtl/verilog/stream_fifo_if.v", 
+      "rtl/verilog/stream_dual_clock_fifo.v", 
+      "rtl/verilog/stream_mux.v"
+    ]
+  }, 
+  "plusargs": {
+    "read_rate": [
+      "str", 
+      "Stream", 
+      "read", 
+      "rate"
+    ], 
+    "write_rate": [
+      "str", 
+      "Stream", 
+      "write", 
+      "rate"
+    ]
+  }, 
+  "main": {
+    "simulators": [
+      "icarus", 
+      "modelsim"
+    ], 
+    "depend": [
+      "fifo-1.0"
+    ]
+  }, 
+  "icarus": {
+    "depend": [
+      "vlog_tb_utils"
+    ]
+  }
+}
+{
+  "simulator": {
+    "toplevel": "wb_ddr_ctrl_tb"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_altera_ddr_wrapper/wb_altera_ddr_wrapper.core", 
+  "modelsim": {
+    "vsim_options": [
+      "-t", 
+      "1ps"
+    ], 
+    "vlog_options": [
+      "+define+sg5B", 
+      "+define+x16", 
+      "+define+FULL_MEM"
+    ], 
+    "depend": [
+      "mt46v16m16p", 
+      "vlog_tb_utils", 
+      "wb_bfm"
+    ]
+  }, 
+  "verilog": {
+    "include_files": [
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_define.iv", 
+      "bench/ddr_ctrl_ip/alt_mem_phy_defines.v"
+    ], 
+    "tb_private_src_files": [
+      "bench/wb_ddr_ctrl_tb.v", 
+      "bench/ddr_ctrl_ip/ddr_ctrl_ip_alt_mem_ddrx_controller_top.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_controller.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_addr_cmd.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_addr_cmd_wrap.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_controller_st_top.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ddr2_odt_gen.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ddr3_odt_gen.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_lpddr2_addr_cmd.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_odt_gen.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_rdwr_data_tmg.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_arbiter.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_burst_gen.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_cmd_gen.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_csr.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_buffer.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_buffer_manager.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_burst_tracking.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_dataid_manager.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_fifo.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_list.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_rdata_path.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_wdata_path.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_define.iv", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ecc_decoder.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ecc_decoder_32_syn.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ecc_decoder_64_syn.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ecc_encoder.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ecc_encoder_32_syn.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ecc_encoder_64_syn.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_ecc_encoder_decoder_wrapper.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_input_if.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_mm_st_converter.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_rank_timer.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_sideband.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_tbp.v", 
+      "bench/ddr_ctrl_ip/alt_mem_ddrx_timing_param.v", 
+      "bench/ddr_ctrl_ip/ddr_ctrl_ip_controller_phy.v", 
+      "bench/ddr_ctrl_ip/ddr_ctrl_ip_phy_alt_mem_phy.v", 
+      "bench/ddr_ctrl_ip/ddr_ctrl_ip_phy_alt_mem_phy_pll.v", 
+      "bench/ddr_ctrl_ip/altera_primitives.v", 
+      "bench/ddr_ctrl_ip/cycloneiii_atoms.v", 
+      "bench/ddr_ctrl_ip/sgate.v", 
+      "bench/ddr_ctrl_ip/altera_mf.v", 
+      "bench/ddr_ctrl_ip/220model.v", 
+      "bench/ddr_ctrl_ip/ddr_ctrl_ip_phy_alt_mem_phy_seq_wrapper.vo", 
+      "bench/ddr_ctrl_ip/ddr_ctrl_ip_sim.v", 
+      "bench/ddr_ctrl_ip/ddr_ctrl_ip_phy.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/wb_port_arbiter.v", 
+      "rtl/verilog/bufram.v", 
+      "rtl/verilog/dpram_altera.v", 
+      "rtl/verilog/wb_ddr_ctrl.v", 
+      "rtl/verilog/wb_port.v", 
+      "rtl/verilog/ddr_ctrl_wrapper.v"
+    ]
+  }, 
+  "plusargs": {
+    "transactions": [
+      "int", 
+      "\"Number", 
+      "of", 
+      "wishbone", 
+      "transactions\""
+    ]
+  }, 
+  "main": {
+    "simulators": [
+      "modelsim"
+    ], 
+    "depend": [
+      "fifo-1.0"
+    ], 
+    "description": "\"Altera DDR controller wrapper with multiple wishbone slave ports\""
+  }
+}
+{
+  "main": {
+    "description": "Simulation model for uart16550"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/uart16550_model/uart16550_model.core", 
+  "verilog": {
+    "tb_src_files": [
+      "uart16550_model.v"
+    ], 
+    "src_files": [
+      "wb_uart_wrapper.v"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "UART 16550 transceiver", 
+    "patches": [
+      "files/0000-remove-delay-assignments.diff", 
+      "files/0001-fix-bit-widths.diff", 
+      "files/0002-add-missing-wires.diff", 
+      "files/0003-prescaler-support.diff", 
+      "files/0005-disable-debug-output.diff", 
+      "files/0006-fix-wb-slave-behavior.diff"
+    ]
+  }, 
+  "core_file": "../../orpsoc-cores/cores/uart16550/uart16550.core", 
+  "verilog": {
+    "src_files": [
+      "rtl/verilog/raminfr.v", 
+      "rtl/verilog/uart_debug_if.v", 
+      "rtl/verilog/uart_receiver.v", 
+      "rtl/verilog/uart_regs.v", 
+      "rtl/verilog/uart_rfifo.v", 
+      "rtl/verilog/uart_sync_flops.v", 
+      "rtl/verilog/uart_tfifo.v", 
+      "rtl/verilog/uart_top.v", 
+      "rtl/verilog/uart_transmitter.v", 
+      "rtl/verilog/uart_wb.v"
+    ]
+  }, 
+  "provider": {
+    "repo_root": "trunk", 
+    "revision": "108", 
+    "name": "opencores", 
+    "repo_name": "uart16550"
+  }
+}
+{
+  "main": {
+    "description": "UART 16550 transceiver"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/uart16550/uart16550-1.5.core", 
+  "verilog": {
+    "src_files": [
+      "rtl/verilog/raminfr.v", 
+      "rtl/verilog/uart_debug_if.v", 
+      "rtl/verilog/uart_receiver.v", 
+      "rtl/verilog/uart_regs.v", 
+      "rtl/verilog/uart_rfifo.v", 
+      "rtl/verilog/uart_sync_flops.v", 
+      "rtl/verilog/uart_tfifo.v", 
+      "rtl/verilog/uart_top.v", 
+      "rtl/verilog/uart_transmitter.v", 
+      "rtl/verilog/uart_wb.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "uart16550", 
+    "version": "rel_5", 
+    "name": "github", 
+    "user": "olofk"
+  }
+}
+{
+  "main": {
+    "simulators": [
+      "icarus", 
+      "modelsim"
+    ], 
+    "depend": [
+      "vlog_tb_utils"
+    ], 
+    "description": "Wishbone BFM"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_bfm/wb_bfm.core", 
+  "verilog": {
+    "include_files": [
+      "wb_bfm-0/wb_bfm_params.v"
+    ], 
+    "tb_include_files": [
+      "wb_bfm-0/wb_bfm_common.v"
+    ], 
+    "tb_src_files": [
+      "wb_bfm-0/wb_bfm_master.v", 
+      "wb_bfm-0/wb_bfm_slave.v", 
+      "wb_bfm-0/wb_bfm_memory.v", 
+      "wb_bfm-0/wb_bfm_transactor.v"
+    ], 
+    "tb_private_src_files": [
+      "wb_bfm-0/bench/wb_master.v", 
+      "wb_bfm-0/bench/wb_bfm_tb.v"
+    ]
+  }, 
+  "simulator": {
+    "toplevel": "wb_bfm_tb"
+  }
+}
+{
+  "main": {
+    "simulators": [
+      "icarus", 
+      "modelsim"
+    ], 
+    "depend": [
+      "vlog_tb_utils", 
+      "wb_common"
+    ], 
+    "description": "Wishbone BFM"
+  }, 
+  "provider": {
+    "repo": "wb_bfm", 
+    "version": "v1.0", 
+    "name": "github", 
+    "user": "olofk"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_bfm/wb_bfm-1.0.core", 
+  "verilog": {
+    "tb_src_files": [
+      "wb_bfm_master.v", 
+      "wb_bfm_slave.v", 
+      "wb_bfm_memory.v", 
+      "wb_bfm_transactor.v"
+    ], 
+    "tb_private_src_files": [
+      "bench/wb_bfm_tb.v"
+    ]
+  }, 
+  "simulator": {
+    "toplevel": "wb_bfm_tb"
+  }
+}
+{
+  "main": {
+    "description": "OpenRISC 1200 CPU"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/or1200/or1200.core", 
+  "verilog": {
+    "tb_include_files": [
+      "bench/or1200_monitor_defines.v"
+    ], 
+    "tb_src_files": [
+      "bench/or1200_monitor.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/or1200_alu.v", 
+      "rtl/verilog/or1200_amultp2_32x32.v", 
+      "rtl/verilog/or1200_cfgr.v", 
+      "rtl/verilog/or1200_cpu.v", 
+      "rtl/verilog/or1200_ctrl.v", 
+      "rtl/verilog/or1200_dc_fsm.v", 
+      "rtl/verilog/or1200_dc_ram.v", 
+      "rtl/verilog/or1200_dc_tag.v", 
+      "rtl/verilog/or1200_dc_top.v", 
+      "rtl/verilog/or1200_dmmu_tlb.v", 
+      "rtl/verilog/or1200_dmmu_top.v", 
+      "rtl/verilog/or1200_dpram_256x32.v", 
+      "rtl/verilog/or1200_dpram_32x32.v", 
+      "rtl/verilog/or1200_dpram.v", 
+      "rtl/verilog/or1200_du.v", 
+      "rtl/verilog/or1200_except.v", 
+      "rtl/verilog/or1200_fpu_addsub.v", 
+      "rtl/verilog/or1200_fpu_arith.v", 
+      "rtl/verilog/or1200_fpu_div.v", 
+      "rtl/verilog/or1200_fpu_fcmp.v", 
+      "rtl/verilog/or1200_fpu_intfloat_conv.v", 
+      "rtl/verilog/or1200_fpu_intfloat_conv_except.v", 
+      "rtl/verilog/or1200_fpu_mul.v", 
+      "rtl/verilog/or1200_fpu_post_norm_addsub.v", 
+      "rtl/verilog/or1200_fpu_post_norm_div.v", 
+      "rtl/verilog/or1200_fpu_post_norm_intfloat_conv.v", 
+      "rtl/verilog/or1200_fpu_post_norm_mul.v", 
+      "rtl/verilog/or1200_fpu_pre_norm_addsub.v", 
+      "rtl/verilog/or1200_fpu_pre_norm_div.v", 
+      "rtl/verilog/or1200_fpu_pre_norm_mul.v", 
+      "rtl/verilog/or1200_fpu.v", 
+      "rtl/verilog/or1200_freeze.v", 
+      "rtl/verilog/or1200_genpc.v", 
+      "rtl/verilog/or1200_gmultp2_32x32.v", 
+      "rtl/verilog/or1200_ic_fsm.v", 
+      "rtl/verilog/or1200_ic_ram.v", 
+      "rtl/verilog/or1200_ic_tag.v", 
+      "rtl/verilog/or1200_ic_top.v", 
+      "rtl/verilog/or1200_if.v", 
+      "rtl/verilog/or1200_immu_tlb.v", 
+      "rtl/verilog/or1200_immu_top.v", 
+      "rtl/verilog/or1200_iwb_biu.v", 
+      "rtl/verilog/or1200_lsu.v", 
+      "rtl/verilog/or1200_mem2reg.v", 
+      "rtl/verilog/or1200_mult_mac.v", 
+      "rtl/verilog/or1200_operandmuxes.v", 
+      "rtl/verilog/or1200_pic.v", 
+      "rtl/verilog/or1200_pm.v", 
+      "rtl/verilog/or1200_qmem_top.v", 
+      "rtl/verilog/or1200_reg2mem.v", 
+      "rtl/verilog/or1200_rfram_generic.v", 
+      "rtl/verilog/or1200_rf.v", 
+      "rtl/verilog/or1200_sb_fifo.v", 
+      "rtl/verilog/or1200_sb.v", 
+      "rtl/verilog/or1200_spram_1024x32_bw.v", 
+      "rtl/verilog/or1200_spram_1024x32.v", 
+      "rtl/verilog/or1200_spram_1024x8.v", 
+      "rtl/verilog/or1200_spram_128x32.v", 
+      "rtl/verilog/or1200_spram_2048x32_bw.v", 
+      "rtl/verilog/or1200_spram_2048x32.v", 
+      "rtl/verilog/or1200_spram_2048x8.v", 
+      "rtl/verilog/or1200_spram_256x21.v", 
+      "rtl/verilog/or1200_spram_32_bw.v", 
+      "rtl/verilog/or1200_spram_32x24.v", 
+      "rtl/verilog/or1200_spram_512x20.v", 
+      "rtl/verilog/or1200_spram_64x14.v", 
+      "rtl/verilog/or1200_spram_64x22.v", 
+      "rtl/verilog/or1200_spram_64x24.v", 
+      "rtl/verilog/or1200_spram.v", 
+      "rtl/verilog/or1200_sprs.v", 
+      "rtl/verilog/or1200_top.v", 
+      "rtl/verilog/or1200_tpram_32x32.v", 
+      "rtl/verilog/or1200_tt.v", 
+      "rtl/verilog/or1200_wb_biu.v", 
+      "rtl/verilog/or1200_wbmux.v", 
+      "rtl/verilog/or1200_xcv_ram32x8d.v", 
+      "rtl/verilog/timescale.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "or1200", 
+    "name": "github", 
+    "cachable": "false", 
+    "user": "openrisc"
+  }
+}
+{
+  "main": {
+    "description": "OpenRISC 1200 CPU"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/or1200/or1200-r2.core", 
+  "verilog": {
+    "tb_include_files": [
+      "bench/or1200_monitor_defines.v"
+    ], 
+    "tb_src_files": [
+      "bench/or1200_monitor.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/or1200_alu.v", 
+      "rtl/verilog/or1200_amultp2_32x32.v", 
+      "rtl/verilog/or1200_cfgr.v", 
+      "rtl/verilog/or1200_cpu.v", 
+      "rtl/verilog/or1200_ctrl.v", 
+      "rtl/verilog/or1200_dc_fsm.v", 
+      "rtl/verilog/or1200_dc_ram.v", 
+      "rtl/verilog/or1200_dc_tag.v", 
+      "rtl/verilog/or1200_dc_top.v", 
+      "rtl/verilog/or1200_dmmu_tlb.v", 
+      "rtl/verilog/or1200_dmmu_top.v", 
+      "rtl/verilog/or1200_dpram_256x32.v", 
+      "rtl/verilog/or1200_dpram_32x32.v", 
+      "rtl/verilog/or1200_dpram.v", 
+      "rtl/verilog/or1200_du.v", 
+      "rtl/verilog/or1200_except.v", 
+      "rtl/verilog/or1200_fpu_addsub.v", 
+      "rtl/verilog/or1200_fpu_arith.v", 
+      "rtl/verilog/or1200_fpu_div.v", 
+      "rtl/verilog/or1200_fpu_fcmp.v", 
+      "rtl/verilog/or1200_fpu_intfloat_conv.v", 
+      "rtl/verilog/or1200_fpu_intfloat_conv_except.v", 
+      "rtl/verilog/or1200_fpu_mul.v", 
+      "rtl/verilog/or1200_fpu_post_norm_addsub.v", 
+      "rtl/verilog/or1200_fpu_post_norm_div.v", 
+      "rtl/verilog/or1200_fpu_post_norm_intfloat_conv.v", 
+      "rtl/verilog/or1200_fpu_post_norm_mul.v", 
+      "rtl/verilog/or1200_fpu_pre_norm_addsub.v", 
+      "rtl/verilog/or1200_fpu_pre_norm_div.v", 
+      "rtl/verilog/or1200_fpu_pre_norm_mul.v", 
+      "rtl/verilog/or1200_fpu.v", 
+      "rtl/verilog/or1200_freeze.v", 
+      "rtl/verilog/or1200_genpc.v", 
+      "rtl/verilog/or1200_gmultp2_32x32.v", 
+      "rtl/verilog/or1200_ic_fsm.v", 
+      "rtl/verilog/or1200_ic_ram.v", 
+      "rtl/verilog/or1200_ic_tag.v", 
+      "rtl/verilog/or1200_ic_top.v", 
+      "rtl/verilog/or1200_if.v", 
+      "rtl/verilog/or1200_immu_tlb.v", 
+      "rtl/verilog/or1200_immu_top.v", 
+      "rtl/verilog/or1200_iwb_biu.v", 
+      "rtl/verilog/or1200_lsu.v", 
+      "rtl/verilog/or1200_mem2reg.v", 
+      "rtl/verilog/or1200_mult_mac.v", 
+      "rtl/verilog/or1200_operandmuxes.v", 
+      "rtl/verilog/or1200_pic.v", 
+      "rtl/verilog/or1200_pm.v", 
+      "rtl/verilog/or1200_qmem_top.v", 
+      "rtl/verilog/or1200_reg2mem.v", 
+      "rtl/verilog/or1200_rfram_generic.v", 
+      "rtl/verilog/or1200_rf.v", 
+      "rtl/verilog/or1200_sb_fifo.v", 
+      "rtl/verilog/or1200_sb.v", 
+      "rtl/verilog/or1200_spram_1024x32_bw.v", 
+      "rtl/verilog/or1200_spram_1024x32.v", 
+      "rtl/verilog/or1200_spram_1024x8.v", 
+      "rtl/verilog/or1200_spram_128x32.v", 
+      "rtl/verilog/or1200_spram_2048x32_bw.v", 
+      "rtl/verilog/or1200_spram_2048x32.v", 
+      "rtl/verilog/or1200_spram_2048x8.v", 
+      "rtl/verilog/or1200_spram_256x21.v", 
+      "rtl/verilog/or1200_spram_32_bw.v", 
+      "rtl/verilog/or1200_spram_32x24.v", 
+      "rtl/verilog/or1200_spram_512x20.v", 
+      "rtl/verilog/or1200_spram_64x14.v", 
+      "rtl/verilog/or1200_spram_64x22.v", 
+      "rtl/verilog/or1200_spram_64x24.v", 
+      "rtl/verilog/or1200_spram.v", 
+      "rtl/verilog/or1200_sprs.v", 
+      "rtl/verilog/or1200_top.v", 
+      "rtl/verilog/or1200_tpram_32x32.v", 
+      "rtl/verilog/or1200_tt.v", 
+      "rtl/verilog/or1200_wb_biu.v", 
+      "rtl/verilog/or1200_wbmux.v", 
+      "rtl/verilog/or1200_xcv_ram32x8d.v", 
+      "rtl/verilog/timescale.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "or1200", 
+    "version": "cdd2d2aac7e31be2945e18ae2f82f11802580cdf", 
+    "name": "github", 
+    "user": "openrisc"
+  }
+}
+{
+  "main": {
+    "description": "Common Flash Interface (CFI) controller"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/cfi_ctrl/cfi_ctrl.core", 
+  "verilog": {
+    "src_files": [
+      "rtl/verilog/cfi_ctrl.v", 
+      "rtl/verilog/cfi_ctrl_engine.v"
+    ]
+  }, 
+  "provider": {
+    "repo_root": "trunk", 
+    "revision": "2", 
+    "name": "opencores", 
+    "repo_name": "cfi_ctrl"
+  }
+}
+{
+  "main": {
+    "depend": [
+      "elf-loader"
+    ], 
+    "description": "\"Verilator test bench utility class\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/verilator_tb_utils/verilator_tb_utils.core", 
+  "verilator": {
+    "source_type": "CPP", 
+    "include_files": [
+      "verilator_tb_utils.h", 
+      "jtagServer.h"
+    ], 
+    "src_files": [
+      "verilator_tb_utils.cpp", 
+      "jtagServer.cpp"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "Library of simulated Xilinx primitives"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/xilibs/xilibs.core", 
+  "verilog": {
+    "src_files": [
+      "xilibs/hdl/BUFG.v", 
+      "xilibs/hdl/BUFIO.v", 
+      "xilibs/hdl/BUFR.v", 
+      "xilibs/hdl/IBUFDS.v", 
+      "xilibs/hdl/IBUFG.v", 
+      "xilibs/hdl/IBUFGDS.v", 
+      "xilibs/hdl/ISERDESE2.v", 
+      "xilibs/hdl/OBUFDS.v", 
+      "xilibs/hdl/OBUFTDS.v", 
+      "xilibs/hdl/ODDR.v", 
+      "xilibs/hdl/OSERDESE2.v", 
+      "xilibs/hdl/PLLE2_BASE.v", 
+      "xilibs/hdl/RAM32X1D.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "oh", 
+    "version": "195069994f3f16829bfdeb9b2d2beccc8fe59718", 
+    "name": "github", 
+    "user": "parallella"
+  }
+}
+{
+  "main": {
+    "description": "JTAG Tap"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/jtag_tap/jtag_tap.core", 
+  "verilog": {
+    "src_files": [
+      "tap/rtl/verilog/tap_top.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "jtag", 
+    "version": "59eca842130c0065849a564cd13508bffa2cb639", 
+    "name": "github", 
+    "user": "olofk"
+  }
+}
+{
+  "main": {
+    "simulators": [
+      "modelsim"
+    ], 
+    "patches": [
+      "files/0001-Fusesocify-include-paths.patch"
+    ]
+  }, 
+  "provider": {
+    "repo": "SD-card-controller", 
+    "version": "c25b4a819f90b8af52d46790fafb47ceabc2ca95", 
+    "name": "github", 
+    "user": "mczerski"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/SD-card-controller/SD-card-controller.core", 
+  "verilog": {
+    "include_files": [
+      "rtl/verilog/sd_defines.h"
+    ], 
+    "tb_include_files": [
+      "bench/verilog/wb_model_defines.h", 
+      "sim/rtl_sim/bin/ramdisk2.hex", 
+      "sim/rtl_sim/bin/wb_memory.txt"
+    ], 
+    "tb_private_src_files": [
+      "bench/verilog/byte_en_reg_tb.sv", 
+      "bench/verilog/sd_cmd_serial_host_tb.sv", 
+      "bench/verilog/sdModel.v", 
+      "bench/verilog/monostable_domain_cross_tb.sv", 
+      "bench/verilog/sd_cmd_master_tb.sv", 
+      "bench/verilog/sd_data_master_tb.sv", 
+      "bench/verilog/wb_master32.v", 
+      "bench/verilog/sd_fifo_filler_tb.sv", 
+      "bench/verilog/bistable_domain_cross_tb.sv", 
+      "bench/verilog/wb_master_behavioral.v", 
+      "bench/verilog/sd_controller_wb_tb.sv", 
+      "bench/verilog/wb_bus_mon.v", 
+      "bench/verilog/sd_wb_sel_ctrl_tb.sv", 
+      "bench/verilog/edge_detect_tb.sv", 
+      "bench/verilog/wb_slave_behavioral.v", 
+      "bench/verilog/sd_data_xfer_trig_tb.sv", 
+      "bench/verilog/sd_data_serial_host_tb.sv", 
+      "bench/verilog/sd_controller_top_tb.sv"
+    ], 
+    "src_files": [
+      "rtl/verilog/sd_data_xfer_trig.v", 
+      "rtl/verilog/sd_crc_16.v", 
+      "rtl/verilog/generic_fifo_dc_gray.v", 
+      "rtl/verilog/sd_clock_divider.v", 
+      "rtl/verilog/sd_cmd_master.v", 
+      "rtl/verilog/sd_crc_7.v", 
+      "rtl/verilog/sd_cmd_serial_host.v", 
+      "rtl/verilog/generic_dpram.v", 
+      "rtl/verilog/sdc_controller.v", 
+      "rtl/verilog/monostable_domain_cross.v", 
+      "rtl/verilog/sd_wb_sel_ctrl.v", 
+      "rtl/verilog/sd_data_serial_host.v", 
+      "rtl/verilog/sd_controller_wb.v", 
+      "rtl/verilog/sd_data_master.v", 
+      "rtl/verilog/bistable_domain_cross.v", 
+      "rtl/verilog/sd_fifo_filler.v", 
+      "rtl/verilog/byte_en_reg.v", 
+      "rtl/verilog/edge_detect.v"
+    ]
+  }, 
+  "simulator": {
+    "toplevel": "sd_controller_top_tb"
+  }
+}
+{
+  "plusargs": {
+    "elf-load": [
+      "file", 
+      "ELF", 
+      "file", 
+      "to", 
+      "preload", 
+      "to", 
+      "memory"
+    ]
+  }, 
+  "core_file": "../../orpsoc-cores/cores/elf-loader/elf-loader.core", 
+  "scripts": {
+    "pre_build_scripts": [
+      "check_libelf.sh"
+    ]
+  }, 
+  "main": {
+    "description": "\"Generic ELF loader\""
+  }, 
+  "vpi": {
+    "libs": [
+      "-lelf"
+    ], 
+    "include_files": [
+      "elf-loader.h"
+    ], 
+    "src_files": [
+      "elf-loader.c", 
+      "vpi_wrapper.c"
+    ]
+  }, 
+  "verilator": {
+    "libs": [
+      "-lelf"
+    ], 
+    "include_files": [
+      "elf-loader.h"
+    ], 
+    "src_files": [
+      "elf-loader.c"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "Wishbone <-> Avalon bus bridges"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_avalon_bridge/wb_avalon_bridge.core", 
+  "verilog": {
+    "src_files": [
+      "verilog/wb_to_avalon_bridge.v", 
+      "verilog/avalon_to_wb_bridge.v"
+    ]
+  }
+}
+{
+  "simulator": {
+    "toplevel": "wb_ram_tb"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_ram/wb_ram.core", 
+  "modelsim": {
+    "depend": [
+      "vlog_tb_utils", 
+      "wb_bfm"
+    ]
+  }, 
+  "verilog": {
+    "tb_private_src_files": [
+      "bench/wb_ram_tb.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/wb_ram.v", 
+      "rtl/verilog/wb_ram_generic.v"
+    ]
+  }, 
+  "plusargs": {
+    "transactions": [
+      "int", 
+      "\"Number", 
+      "of", 
+      "wishbone", 
+      "transactions\""
+    ]
+  }, 
+  "main": {
+    "simulators": [
+      "icarus", 
+      "modelsim"
+    ], 
+    "depend": [
+      "wb_common"
+    ], 
+    "description": "Wishbone RAM with selectable backends"
+  }, 
+  "icarus": {
+    "depend": [
+      "vlog_tb_utils", 
+      "wb_bfm"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "PS/2 core with wishbone interface"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/ps2/ps2.core", 
+  "verilog": {
+    "src_files": [
+      "verilog/ps2.v", 
+      "verilog/ps2_wb.v"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "\"OpenCores SPI Core\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/simple_spi/simple_spi.core", 
+  "verilog": {
+    "src_files": [
+      "rtl/verilog/fifo4.v", 
+      "rtl/verilog/simple_spi_top.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "simple_spi", 
+    "version": "b80d0514d6059a4e201af736c01a7655a563cf65", 
+    "name": "github", 
+    "user": "olofk"
+  }
+}
+{
+  "main": {
+    "description": "or1200 Debug Interface"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/dbg/dbg.core", 
+  "verilog": {
+    "include_files": [
+      "rtl/verilog/dbg_cpu_defines.v", 
+      "rtl/verilog/dbg_defines.v", 
+      "rtl/verilog/dbg_wb_defines.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/dbg_cpu.v", 
+      "rtl/verilog/dbg_cpu_registers.v", 
+      "rtl/verilog/dbg_crc32_d1.v", 
+      "rtl/verilog/dbg_register.v", 
+      "rtl/verilog/dbg_top.v", 
+      "rtl/verilog/dbg_wb.v"
+    ]
+  }, 
+  "provider": {
+    "repo_root": "trunk", 
+    "revision": "158", 
+    "name": "opencores", 
+    "repo_name": "dbg_interface"
+  }
+}
+{
+  "main": {
+    "description": "Wire delay Verilog model"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wiredelay/wiredelay.core", 
+  "verilog": {
+    "tb_src_files": [
+      "verilog/wiredelay.v"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "Scalable arbiter"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/scalable_arbiter/scalable_arbiter.core", 
+  "verilog": {
+    "include_files": [
+      "rtl/verilog/functions.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/arbiter.v"
+    ]
+  }, 
+  "provider": {
+    "repo_root": "trunk", 
+    "revision": "12", 
+    "name": "opencores", 
+    "repo_name": "scalable_arbiter"
+  }
+}
+{
+  "main": {
+    "description": "\"Verilog arbiter\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/verilog-arbiter/verilog-arbiter-r1.core", 
+  "verilog": {
+    "tb_private_src_files": [
+      "src/arbiter_tb.v"
+    ], 
+    "src_files": [
+      "src/arbiter.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "verilog-arbiter", 
+    "version": "b79f89e17f0be3b70a513c1a0b456f734a79273a", 
+    "name": "github", 
+    "user": "bmartini"
+  }
+}
+{
+  "main": {
+    "description": "\"Verilog arbiter\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/verilog-arbiter/verilog-arbiter.core", 
+  "verilog": {
+    "src_files": [
+      "src/arbiter.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "verilog-arbiter", 
+    "version": "4d7be0fb204a249491a5b321887f4b9bbc133558", 
+    "name": "github", 
+    "user": "bmartini"
+  }
+}
+{
+  "main": {
+    "description": "\"Verilog utility functions\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/verilog_utils/verilog_utils.core", 
+  "verilog": {
+    "include_files": [
+      "verilog_utils.vh"
+    ]
+  }
+}
+{
+  "main": {}, 
+  "core_file": "../../orpsoc-cores/cores/adv_debug_sys/adv_debug_sys.core", 
+  "verilog": {
+    "include_files": [
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_defines.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_wb_defines.v"
+    ], 
+    "src_files": [
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_wb_biu.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_or1k_status_reg.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_jsp_biu.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_or1k_module.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/syncflop.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_crc32.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_jsp_module.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_top.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/bytefifo.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_or1k_biu.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_or1k_defines.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/syncreg.v", 
+      "Hardware/adv_dbg_if/rtl/verilog/adbg_wb_module.v"
+    ]
+  }, 
+  "provider": {
+    "repo": "adv_debug_sys", 
+    "version": "9a2a713b9bd11f536fa8fe3de8367674e9106dd2", 
+    "name": "github", 
+    "user": "olofk"
+  }
+}
+{
+  "main": {
+    "description": "\"mor1kx CPU\""
+  }, 
+  "provider": {
+    "repo": "mor1kx", 
+    "version": "master", 
+    "name": "github", 
+    "cachable": "false", 
+    "user": "openrisc"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/mor1kx/mor1kx.core", 
+  "verilog": {
+    "include_files": [
+      "rtl/verilog/mor1kx-defines.v", 
+      "rtl/verilog/mor1kx-sprs.v", 
+      "rtl/verilog/mor1kx_utils.vh"
+    ], 
+    "tb_src_files": [
+      "bench/verilog/mor1kx_monitor.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/mor1kx_branch_prediction.v", 
+      "rtl/verilog/mor1kx_bus_if_avalon.v", 
+      "rtl/verilog/mor1kx_bus_if_wb32.v", 
+      "rtl/verilog/mor1kx_cache_lru.v", 
+      "rtl/verilog/mor1kx_cfgrs.v", 
+      "rtl/verilog/mor1kx_cpu_cappuccino.v", 
+      "rtl/verilog/mor1kx_cpu_espresso.v", 
+      "rtl/verilog/mor1kx_cpu_prontoespresso.v", 
+      "rtl/verilog/mor1kx_cpu.v", 
+      "rtl/verilog/mor1kx_ctrl_cappuccino.v", 
+      "rtl/verilog/mor1kx_ctrl_espresso.v", 
+      "rtl/verilog/mor1kx_ctrl_prontoespresso.v", 
+      "rtl/verilog/mor1kx_dcache.v", 
+      "rtl/verilog/mor1kx_decode_execute_cappuccino.v", 
+      "rtl/verilog/mor1kx_decode.v", 
+      "rtl/verilog/mor1kx_dmmu.v", 
+      "rtl/verilog/mor1kx_execute_alu.v", 
+      "rtl/verilog/mor1kx_execute_ctrl_cappuccino.v", 
+      "rtl/verilog/mor1kx_fetch_cappuccino.v", 
+      "rtl/verilog/mor1kx_fetch_espresso.v", 
+      "rtl/verilog/mor1kx_fetch_prontoespresso.v", 
+      "rtl/verilog/mor1kx_fetch_tcm_prontoespresso.v", 
+      "rtl/verilog/mor1kx_icache.v", 
+      "rtl/verilog/mor1kx_immu.v", 
+      "rtl/verilog/mor1kx_lsu_cappuccino.v", 
+      "rtl/verilog/mor1kx_lsu_espresso.v", 
+      "rtl/verilog/mor1kx_pic.v", 
+      "rtl/verilog/mor1kx_rf_cappuccino.v", 
+      "rtl/verilog/mor1kx_rf_espresso.v", 
+      "rtl/verilog/mor1kx_simple_dpram_sclk.v", 
+      "rtl/verilog/mor1kx_store_buffer.v", 
+      "rtl/verilog/mor1kx_ticktimer.v", 
+      "rtl/verilog/mor1kx_true_dpram_sclk.v", 
+      "rtl/verilog/mor1kx.v", 
+      "rtl/verilog/mor1kx_wb_mux_cappuccino.v", 
+      "rtl/verilog/mor1kx_wb_mux_espresso.v", 
+      "rtl/verilog/pfpu32/pfpu32_addsub.v", 
+      "rtl/verilog/pfpu32/pfpu32_cmp.v", 
+      "rtl/verilog/pfpu32/pfpu32_f2i.v", 
+      "rtl/verilog/pfpu32/pfpu32_i2f.v", 
+      "rtl/verilog/pfpu32/pfpu32_muldiv.v", 
+      "rtl/verilog/pfpu32/pfpu32_rnd.v", 
+      "rtl/verilog/pfpu32/pfpu32_top.v"
+    ]
+  }, 
+  "plusargs": {
+    "trace_to_screen": [
+      "bool", 
+      "\"Output", 
+      "trace", 
+      "to", 
+      "screen\""
+    ], 
+    "trace_enable": [
+      "bool", 
+      "\"Enable", 
+      "trace\""
+    ]
+  }
+}
+{
+  "main": {
+    "description": "\"mor1kx CPU\""
+  }, 
+  "provider": {
+    "repo": "mor1kx", 
+    "version": "v3.1", 
+    "name": "github", 
+    "user": "openrisc"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/mor1kx/mor1kx-3.1.core", 
+  "verilog": {
+    "include_files": [
+      "rtl/verilog/mor1kx-defines.v", 
+      "rtl/verilog/mor1kx-sprs.v", 
+      "rtl/verilog/mor1kx_utils.vh"
+    ], 
+    "tb_src_files": [
+      "bench/verilog/mor1kx_monitor.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/mor1kx_branch_prediction.v", 
+      "rtl/verilog/mor1kx_bus_if_avalon.v", 
+      "rtl/verilog/mor1kx_bus_if_wb32.v", 
+      "rtl/verilog/mor1kx_cache_lru.v", 
+      "rtl/verilog/mor1kx_cfgrs.v", 
+      "rtl/verilog/mor1kx_cpu_cappuccino.v", 
+      "rtl/verilog/mor1kx_cpu_espresso.v", 
+      "rtl/verilog/mor1kx_cpu_prontoespresso.v", 
+      "rtl/verilog/mor1kx_cpu.v", 
+      "rtl/verilog/mor1kx_ctrl_cappuccino.v", 
+      "rtl/verilog/mor1kx_ctrl_espresso.v", 
+      "rtl/verilog/mor1kx_ctrl_prontoespresso.v", 
+      "rtl/verilog/mor1kx_dcache.v", 
+      "rtl/verilog/mor1kx_decode_execute_cappuccino.v", 
+      "rtl/verilog/mor1kx_decode.v", 
+      "rtl/verilog/mor1kx_dmmu.v", 
+      "rtl/verilog/mor1kx_execute_alu.v", 
+      "rtl/verilog/mor1kx_execute_ctrl_cappuccino.v", 
+      "rtl/verilog/mor1kx_fetch_cappuccino.v", 
+      "rtl/verilog/mor1kx_fetch_espresso.v", 
+      "rtl/verilog/mor1kx_fetch_prontoespresso.v", 
+      "rtl/verilog/mor1kx_fetch_tcm_prontoespresso.v", 
+      "rtl/verilog/mor1kx_icache.v", 
+      "rtl/verilog/mor1kx_immu.v", 
+      "rtl/verilog/mor1kx_lsu_cappuccino.v", 
+      "rtl/verilog/mor1kx_lsu_espresso.v", 
+      "rtl/verilog/mor1kx_pic.v", 
+      "rtl/verilog/mor1kx_rf_cappuccino.v", 
+      "rtl/verilog/mor1kx_rf_espresso.v", 
+      "rtl/verilog/mor1kx_simple_dpram_sclk.v", 
+      "rtl/verilog/mor1kx_store_buffer.v", 
+      "rtl/verilog/mor1kx_ticktimer.v", 
+      "rtl/verilog/mor1kx_true_dpram_sclk.v", 
+      "rtl/verilog/mor1kx.v", 
+      "rtl/verilog/mor1kx_wb_mux_cappuccino.v", 
+      "rtl/verilog/mor1kx_wb_mux_espresso.v"
+    ]
+  }, 
+  "plusargs": {
+    "trace_to_screen": [
+      "bool", 
+      "\"Output", 
+      "trace", 
+      "to", 
+      "screen\""
+    ], 
+    "trace_enable": [
+      "bool", 
+      "\"Enable", 
+      "trace\""
+    ]
+  }
+}
+{
+  "main": {
+    "description": "\"mor1kx CPU\""
+  }, 
+  "provider": {
+    "repo": "mor1kx", 
+    "version": "v2.2", 
+    "name": "github", 
+    "user": "openrisc"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/mor1kx/mor1kx-2.2.core", 
+  "verilog": {
+    "include_files": [
+      "rtl/verilog/mor1kx-defines.v", 
+      "rtl/verilog/mor1kx-sprs.v"
+    ], 
+    "tb_src_files": [
+      "bench/verilog/mor1kx_monitor.v"
+    ], 
+    "src_files": [
+      "rtl/verilog/mor1kx_branch_prediction.v", 
+      "rtl/verilog/mor1kx_bus_if_avalon.v", 
+      "rtl/verilog/mor1kx_bus_if_wb32.v", 
+      "rtl/verilog/mor1kx_cache_lru.v", 
+      "rtl/verilog/mor1kx_cfgrs.v", 
+      "rtl/verilog/mor1kx_cpu_cappuccino.v", 
+      "rtl/verilog/mor1kx_cpu_espresso.v", 
+      "rtl/verilog/mor1kx_cpu_prontoespresso.v", 
+      "rtl/verilog/mor1kx_cpu.v", 
+      "rtl/verilog/mor1kx_ctrl_cappuccino.v", 
+      "rtl/verilog/mor1kx_ctrl_espresso.v", 
+      "rtl/verilog/mor1kx_ctrl_prontoespresso.v", 
+      "rtl/verilog/mor1kx_dcache.v", 
+      "rtl/verilog/mor1kx_decode_execute_cappuccino.v", 
+      "rtl/verilog/mor1kx_decode.v", 
+      "rtl/verilog/mor1kx_dmmu.v", 
+      "rtl/verilog/mor1kx_execute_alu.v", 
+      "rtl/verilog/mor1kx_execute_ctrl_cappuccino.v", 
+      "rtl/verilog/mor1kx_fetch_cappuccino.v", 
+      "rtl/verilog/mor1kx_fetch_espresso.v", 
+      "rtl/verilog/mor1kx_fetch_prontoespresso.v", 
+      "rtl/verilog/mor1kx_fetch_tcm_prontoespresso.v", 
+      "rtl/verilog/mor1kx_icache.v", 
+      "rtl/verilog/mor1kx_immu.v", 
+      "rtl/verilog/mor1kx_lsu_cappuccino.v", 
+      "rtl/verilog/mor1kx_lsu_espresso.v", 
+      "rtl/verilog/mor1kx_pic.v", 
+      "rtl/verilog/mor1kx_rf_cappuccino.v", 
+      "rtl/verilog/mor1kx_rf_espresso.v", 
+      "rtl/verilog/mor1kx_rf_ram.v", 
+      "rtl/verilog/mor1kx_simple_dpram_sclk.v", 
+      "rtl/verilog/mor1kx_store_buffer.v", 
+      "rtl/verilog/mor1kx_ticktimer.v", 
+      "rtl/verilog/mor1kx_true_dpram_sclk.v", 
+      "rtl/verilog/mor1kx.v", 
+      "rtl/verilog/mor1kx_wb_mux_cappuccino.v", 
+      "rtl/verilog/mor1kx_wb_mux_espresso.v"
+    ]
+  }, 
+  "plusargs": {
+    "trace_to_screen": [
+      "bool", 
+      "\"Output", 
+      "trace", 
+      "to", 
+      "screen\""
+    ], 
+    "trace_enable": [
+      "bool", 
+      "\"Enable", 
+      "trace\""
+    ]
+  }
+}
+{
+  "main": {
+    "description": "\"bridge from Wishbone to CSR bus\""
+  }, 
+  "core_file": "../../orpsoc-cores/cores/csrbrg/csrbrg.core", 
+  "verilog": {
+    "src_files": [
+      "csrbrg.v"
+    ]
+  }, 
+  "provider": {
+    "url": "https://raw.githubusercontent.com/m-labs/milkymist/master/cores/csrbrg/rtl/csrbrg.v", 
+    "filetype": "simple", 
+    "name": "url"
+  }
+}
+{
+  "main": {
+    "description": "Wishbone RAM"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/ram_wb/ram_wb.core", 
+  "verilog": {
+    "tb_src_files": [
+      "ram_wb_loader.v"
+    ], 
+    "src_files": [
+      "ram_wb.v", 
+      "ram_wb_b3.v"
+    ]
+  }, 
+  "plusargs": {
+    "testcase": [
+      "file", 
+      "VMEM", 
+      "file", 
+      "containing", 
+      "the", 
+      "test", 
+      "case"
+    ]
+  }
+}
+{
+  "core_file": "../../orpsoc-cores/cores/mt48lc16m16a2/mt48lc16m16a2.core", 
+  "modelsim": {
+    "depend": [
+      "elf-loader", 
+      "wiredelay"
+    ]
+  }, 
+  "verilog": {
+    "src_files": [
+      "mt48lc16m16a2.v", 
+      "mt48lc16m16a2_wrapper.v"
+    ]
+  }, 
+  "provider": {
+    "url": "http://www.micron.com/~/media/Documents/Products/Sim%%20Model/DRAM/DRAM/4012mt48lc16m16a2.zip", 
+    "filetype": "zip", 
+    "name": "url"
+  }, 
+  "main": {
+    "description": "Micron 256Mb SDRAM Verilog model"
+  }, 
+  "icarus": {
+    "depend": [
+      "elf-loader", 
+      "wiredelay"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "Common utility functions and parameters for the Wishbone bus"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/wb_common/wb_common.core", 
+  "verilog": {
+    "include_files": [
+      "wb_common_params.v", 
+      "wb_common.v"
+    ]
+  }
+}
+{
+  "main": {
+    "description": "64 Megabit Serial Flash Memory with 104 MHz SPI Bus Interface"
+  }, 
+  "core_file": "../../orpsoc-cores/cores/flash_models/s25fl064p-1.7.core", 
+  "verilog": {
+    "tb_src_files": [
+      "s25fl064p.v"
+    ]
+  }, 
+  "provider": {
+    "url": "http://www.freemodelfoundry.com/fmf_vlog_models/flash/s25fl064p.v", 
+    "filetype": "simple", 
+    "name": "url"
+  }
+}

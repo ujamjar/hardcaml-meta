@@ -1,0 +1,38 @@
+OASISFormat: 0.4
+Name:        hardcaml-meta
+Version:     0.1
+Synopsis:    RTL metadata
+Description: VHDL/Verilog core metadata
+
+Authors:     Andy Ray
+Maintainers: Andy Ray <andy.ray@ujamjar.org>
+Homepage:    https://github.com/ujamjar/hardcaml-meta
+License:     ISC
+Plugins:     META (0.4)
+BuildTools:  ocamlbuild
+
+Library HardCamlMeta
+  Path:          src
+  Findlibname:   hardcaml-meta
+  Pack:          true
+  Modules:       Cores_j, Cores_t, Cores
+  BuildDepends:  atdgen
+  XMETARequires: atdgen
+
+Flag converter
+  Description: build init file conversion tools
+  Default:     false
+
+Executable ini2core
+  Path:               ini2core
+  MainIs:             ini2core.ml
+  Build$:             flag(converter) 
+  Custom:             true
+  CompiledObject:     best
+  Install:            false
+  BuildDepends:       atdgen, hardcaml-meta
+
+SourceRepository master
+  Type:     git
+  Location: https://github.com/ujamjar/hardcaml-meta
+  Browser:  https://github.com/ujamjar/hardcaml-meta

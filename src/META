@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 8dd38d787c67c7b6b33f533ddb9162d0)
+version = "0.1"
+description = "RTL metadata"
+requires = "atdgen"
+archive(byte) = "HardCamlMeta.cma"
+archive(byte, plugin) = "HardCamlMeta.cma"
+archive(native) = "HardCamlMeta.cmxa"
+archive(native, plugin) = "HardCamlMeta.cmxs"
+exists_if = "HardCamlMeta.cma"
+# OASIS_STOP
+

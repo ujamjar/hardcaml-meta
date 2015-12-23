@@ -1,0 +1,29 @@
+# OASIS_START
+# DO NOT EDIT (digest: 5029ebb6ddb95cb8127ce31262b912ec)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library HardCamlMeta
+"src/HardCamlMeta.cmxs": use_HardCamlMeta
+"src/cores_j.cmx": for-pack(HardCamlMeta)
+"src/cores_t.cmx": for-pack(HardCamlMeta)
+"src/cores.cmx": for-pack(HardCamlMeta)
+<src/*.ml{,i,y}>: pkg_atdgen
+# Executable ini2core
+<ini2core/ini2core.{native,byte}>: pkg_atdgen
+<ini2core/ini2core.{native,byte}>: use_HardCamlMeta
+<ini2core/*.ml{,i,y}>: pkg_atdgen
+<ini2core/*.ml{,i,y}>: use_HardCamlMeta
+<ini2core/ini2core.{native,byte}>: custom
+# OASIS_STOP
