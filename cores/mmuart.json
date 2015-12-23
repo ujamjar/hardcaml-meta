@@ -1,0 +1,11 @@
+{
+  "core_name": "mmuart",
+  "version": "1.0.0",
+  "description": "Simple UART from the Milkymist project",
+  "depends": [],
+  "verilog_files": { "src_files": [ "uart_transceiver.v" ] },
+  "provider": [
+    "SIMPLE_FILE",
+    "https://github.com/m-labs/milkymist/raw/master/cores/uart/rtl/uart_transceiver.v"
+  ]
+}

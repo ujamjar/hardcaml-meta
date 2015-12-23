@@ -1,0 +1,33 @@
+{
+  "core_name": "wb_sdram_ctrl",
+  "version": "1.0.0",
+  "description": "SDRAM controller with multiple wishbone slave ports",
+  "depends": [],
+  "verilog_files": {
+    "src_files": [
+      "rtl/verilog/wb_port_arbiter.v", "rtl/verilog/bufram.v",
+      "rtl/verilog/dpram_altera.v", "rtl/verilog/dpram_generic.v",
+      "rtl/verilog/dual_clock_fifo.v", "rtl/verilog/sdram_ctrl.v",
+      "rtl/verilog/wb_port.v", "rtl/verilog/wb_sdram_ctrl.v"
+    ],
+    "tb_private_src_files": [ "bench/wb_sdram_ctrl_tb.v" ]
+  },
+  "testbench": "wb_sdram_ctrl_tb",
+  "provider": [
+    "GITHUB",
+    { "user": "skristiansson", "repo": "wb_sdram_ctrl" }
+  ],
+  "supported_simulators": [ "ICARUS" ],
+  "modelsim": {
+    "depend": [ "mt48lc16m16a2", "vlog_tb_utils", "wb_bfm" ],
+    "vsim_options": [ "-t", "1ps" ]
+  },
+  "icarus": { "depend": [ "mt48lc16m16a2", "vlog_tb_utils", "wb_bfm" ] },
+  "plusargs": [
+    {
+      "name": "transactions",
+      "arg_type": "INT",
+      "description": "\"Number of wishbone transactions\""
+    }
+  ]
+}

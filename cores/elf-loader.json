@@ -1,0 +1,25 @@
+{
+  "core_name": "elf-loader",
+  "version": "1.0.0",
+  "description": "Generic ELF loader",
+  "depends": [],
+  "provider": "NO_PROVIDER",
+  "plusargs": [
+    {
+      "name": "elf-load",
+      "arg_type": "FILE",
+      "description": "ELF file to preload to memory"
+    }
+  ],
+  "vpi": {
+    "src_files": [ "elf-loader.c", "vpi_wrapper.c" ],
+    "include_files": [ "elf-loader.h" ],
+    "libs": [ "-lelf" ]
+  },
+  "verilator": {
+    "include_files": [ "elf-loader.h" ],
+    "src_files": [ "elf-loader.c" ],
+    "libs": [ "-lelf" ]
+  },
+  "pre_build_scripts": [ "check_libelf.sh" ]
+}

@@ -1,0 +1,18 @@
+{
+  "core_name": "verilog-arbiter-r1",
+  "version": "1.0.0",
+  "description": "Verilog arbiter",
+  "depends": [],
+  "verilog_files": {
+    "src_files": [ "src/arbiter.v" ],
+    "tb_private_src_files": [ "src/arbiter_tb.v" ]
+  },
+  "provider": [
+    "GITHUB",
+    {
+      "user": "bmartini",
+      "repo": "verilog-arbiter",
+      "version": "b79f89e17f0be3b70a513c1a0b456f734a79273a"
+    }
+  ]
+}

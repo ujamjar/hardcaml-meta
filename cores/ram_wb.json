@@ -1,0 +1,18 @@
+{
+  "core_name": "ram_wb",
+  "version": "1.0.0",
+  "description": "Wishbone RAM",
+  "depends": [],
+  "verilog_files": {
+    "src_files": [ "ram_wb.v", "ram_wb_b3.v" ],
+    "tb_src_files": [ "ram_wb_loader.v" ]
+  },
+  "provider": "NO_PROVIDER",
+  "plusargs": [
+    {
+      "name": "testcase",
+      "arg_type": "FILE",
+      "description": "VMEM file containing the test case"
+    }
+  ]
+}

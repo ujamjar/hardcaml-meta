@@ -1,0 +1,20 @@
+{
+  "core_name": "wb_bfm",
+  "version": "1.0.0",
+  "description": "Wishbone BFM",
+  "depends": [ "vlog_tb_utils" ],
+  "verilog_files": {
+    "include_files": [ "wb_bfm-0/wb_bfm_params.v" ],
+    "tb_private_src_files": [
+      "wb_bfm-0/bench/wb_master.v", "wb_bfm-0/bench/wb_bfm_tb.v"
+    ],
+    "tb_src_files": [
+      "wb_bfm-0/wb_bfm_master.v", "wb_bfm-0/wb_bfm_slave.v",
+      "wb_bfm-0/wb_bfm_memory.v", "wb_bfm-0/wb_bfm_transactor.v"
+    ],
+    "tb_include_files": [ "wb_bfm-0/wb_bfm_common.v" ]
+  },
+  "testbench": "wb_bfm_tb",
+  "provider": "NO_PROVIDER",
+  "supported_simulators": [ "ICARUS", "MODELSIM" ]
+}

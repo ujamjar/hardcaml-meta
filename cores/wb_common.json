@@ -1,0 +1,11 @@
+{
+  "core_name": "wb_common",
+  "version": "1.0.0",
+  "description":
+    "Common utility functions and parameters for the Wishbone bus",
+  "depends": [],
+  "verilog_files": {
+    "include_files": [ "wb_common_params.v", "wb_common.v" ]
+  },
+  "provider": "NO_PROVIDER"
+}

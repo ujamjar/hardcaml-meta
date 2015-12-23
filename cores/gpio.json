@@ -1,0 +1,8 @@
+{
+  "core_name": "gpio",
+  "version": "1.0.0",
+  "description": "Simple 8-bit gpio core",
+  "depends": [],
+  "verilog_files": { "src_files": [ "gpio.v" ] },
+  "provider": "NO_PROVIDER"
+}

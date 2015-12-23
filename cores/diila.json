@@ -1,0 +1,8 @@
+{
+  "core_name": "diila",
+  "version": "1.0.0",
+  "description": "Device Independent Integrated Logic Analyzer",
+  "depends": [],
+  "verilog_files": { "src_files": [ "rtl/verilog/diila.v" ] },
+  "provider": [ "GITHUB", { "user": "skristiansson", "repo": "diila" } ]
+}

@@ -1,0 +1,32 @@
+{
+  "core_name": "vlog_tb_utils",
+  "version": "1.0.0",
+  "description": "Verilog test bench utility functions",
+  "depends": [],
+  "verilog_files": {
+    "tb_src_files": [ "vlog_functions.v", "vlog_tb_utils.v" ]
+  },
+  "provider": "NO_PROVIDER",
+  "plusargs": [
+    {
+      "name": "testcase",
+      "arg_type": "STR",
+      "description": "Name of testcase (Used for VCD filename)"
+    },
+    {
+      "name": "heartbeat",
+      "arg_type": "INT",
+      "description": "Display a heartbeat message every n*heartbeat"
+    },
+    {
+      "name": "vcd",
+      "arg_type": "BOOL",
+      "description": "\"Enable VCD logging\""
+    },
+    {
+      "name": "timeout",
+      "arg_type": "INT",
+      "description": "\"Abort test case after n cycles\""
+    }
+  ]
+}

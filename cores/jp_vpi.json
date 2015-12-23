@@ -1,0 +1,12 @@
+{
+  "core_name": "jp_vpi",
+  "version": "1.0.0",
+  "description": "Debug interface GDB server",
+  "depends": [],
+  "verilog_files": { "tb_src_files": [ "verilog/vpi_debug_module.v" ] },
+  "provider": "NO_PROVIDER",
+  "vpi": {
+    "src_files": [ "c/jp_vpi.c", "c/rsp-rtl_sim.c", "c/gdb.c" ],
+    "include_files": [ "c/gdb.h", "c/rsp-rtl_sim.h", "c/rsp-vpi.h" ]
+  }
+}

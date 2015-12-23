@@ -235,7 +235,7 @@ let () = printf "Loaded %i cores\n" (List.length cores)
 let () = List.iter 
   (fun core' -> 
     let core = core_of_ini core' in
-    let file = open_out ("cores/" ^ core.Cores_j.core_name) in
+    let file = open_out ("cores/" ^ core.Cores_j.core_name ^ ".json") in
     let repo = 
       (function None -> "no provider specified" | Some(x) -> x) (Cores.get_provider_string core)
     in

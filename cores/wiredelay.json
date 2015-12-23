@@ -1,0 +1,8 @@
+{
+  "core_name": "wiredelay",
+  "version": "1.0.0",
+  "description": "Wire delay Verilog model",
+  "depends": [],
+  "verilog_files": { "tb_src_files": [ "verilog/wiredelay.v" ] },
+  "provider": "NO_PROVIDER"
+}

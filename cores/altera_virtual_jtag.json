@@ -1,0 +1,8 @@
+{
+  "core_name": "altera_virtual_jtag",
+  "version": "1.0.0",
+  "description": "Advanced Debug System wrapper for altera virtual jtag",
+  "depends": [],
+  "verilog_files": { "src_files": [ "altera_virtual_jtag.v" ] },
+  "provider": "NO_PROVIDER"
+}

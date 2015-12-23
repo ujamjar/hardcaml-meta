@@ -1,0 +1,24 @@
+{
+  "core_name": "wb_intercon",
+  "version": "1.0.0",
+  "description": "Wishbone Bus Interconnect utilities",
+  "depends": [
+    "verilog-arbiter", "verilog_utils", "vlog_tb_utils", "wb_bfm"
+  ],
+  "verilog_files": {
+    "src_files": [ "wb_arbiter.v", "wb_data_resize.v", "wb_mux.v" ],
+    "tb_private_src_files": [
+      "bench/wb_mux_tb.v", "bench/wb_arbiter_tb.v", "bench/orpsoc_tb.v"
+    ]
+  },
+  "provider": "NO_PROVIDER",
+  "supported_simulators": [ "ICARUS", "MODELSIM" ],
+  "plusargs": [
+    {
+      "name": "transactions",
+      "arg_type": "INT",
+      "description":
+        "\"Number of wishbone transactions to run in test bench\""
+    }
+  ]
+}

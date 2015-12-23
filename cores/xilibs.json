@@ -1,0 +1,23 @@
+{
+  "core_name": "xilibs",
+  "version": "1.0.0",
+  "description": "Library of simulated Xilinx primitives",
+  "depends": [],
+  "verilog_files": {
+    "src_files": [
+      "xilibs/hdl/BUFG.v", "xilibs/hdl/BUFIO.v", "xilibs/hdl/BUFR.v",
+      "xilibs/hdl/IBUFDS.v", "xilibs/hdl/IBUFG.v", "xilibs/hdl/IBUFGDS.v",
+      "xilibs/hdl/ISERDESE2.v", "xilibs/hdl/OBUFDS.v",
+      "xilibs/hdl/OBUFTDS.v", "xilibs/hdl/ODDR.v", "xilibs/hdl/OSERDESE2.v",
+      "xilibs/hdl/PLLE2_BASE.v", "xilibs/hdl/RAM32X1D.v"
+    ]
+  },
+  "provider": [
+    "GITHUB",
+    {
+      "user": "parallella",
+      "repo": "oh",
+      "version": "195069994f3f16829bfdeb9b2d2beccc8fe59718"
+    }
+  ]
+}

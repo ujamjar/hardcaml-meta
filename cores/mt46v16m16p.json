@@ -1,0 +1,14 @@
+{
+  "core_name": "mt46v16m16p",
+  "version": "1.0.0",
+  "description": "Micron 256Mb DDR-SDRAM Verilog model",
+  "depends": [],
+  "verilog_files": {
+    "include_files": [ "ddr_parameters.vh" ],
+    "src_files": [ "ddr.v" ]
+  },
+  "provider": [
+    "ZIP",
+    "http://www.micron.com/~/media/Documents/Products/Sim%%20Model/DRAM/DRAM/3924256Mb_ddr.zip"
+  ]
+}

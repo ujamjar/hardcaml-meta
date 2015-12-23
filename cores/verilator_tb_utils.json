@@ -1,0 +1,12 @@
+{
+  "core_name": "verilator_tb_utils",
+  "version": "1.0.0",
+  "description": "Verilator test bench utility class",
+  "depends": [ "elf-loader" ],
+  "provider": "NO_PROVIDER",
+  "verilator": {
+    "source_type": "CPP",
+    "include_files": [ "verilator_tb_utils.h", "jtagServer.h" ],
+    "src_files": [ "verilator_tb_utils.cpp", "jtagServer.cpp" ]
+  }
+}

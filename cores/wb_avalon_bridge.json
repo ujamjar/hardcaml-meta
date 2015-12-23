@@ -1,0 +1,12 @@
+{
+  "core_name": "wb_avalon_bridge",
+  "version": "1.0.0",
+  "description": "Wishbone <-> Avalon bus bridges",
+  "depends": [],
+  "verilog_files": {
+    "src_files": [
+      "verilog/wb_to_avalon_bridge.v", "verilog/avalon_to_wb_bridge.v"
+    ]
+  },
+  "provider": "NO_PROVIDER"
+}

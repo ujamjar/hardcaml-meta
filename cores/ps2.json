@@ -1,0 +1,8 @@
+{
+  "core_name": "ps2",
+  "version": "1.0.0",
+  "description": "PS/2 core with wishbone interface",
+  "depends": [],
+  "verilog_files": { "src_files": [ "verilog/ps2.v", "verilog/ps2_wb.v" ] },
+  "provider": "NO_PROVIDER"
+}

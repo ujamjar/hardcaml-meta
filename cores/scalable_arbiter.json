@@ -1,0 +1,14 @@
+{
+  "core_name": "scalable_arbiter",
+  "version": "1.0.0",
+  "description": "Scalable arbiter",
+  "depends": [],
+  "verilog_files": {
+    "include_files": [ "rtl/verilog/functions.v" ],
+    "src_files": [ "rtl/verilog/arbiter.v" ]
+  },
+  "provider": [
+    "OPENCORES",
+    { "repo_name": "scalable_arbiter", "repo_root": "trunk", "revision": 12 }
+  ]
+}

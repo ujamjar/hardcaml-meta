@@ -1,0 +1,16 @@
+{
+  "core_name": "jtag_vpi",
+  "version": "1.0.0",
+  "description": "TCP/IP controlled VPI JTAG Interface",
+  "depends": [],
+  "verilog_files": { "tb_src_files": [ "jtag_vpi.v" ] },
+  "provider": [ "GITHUB", { "user": "fjullien", "repo": "jtag_vpi" } ],
+  "plusargs": [
+    {
+      "name": "jtag-vpi-enable",
+      "arg_type": "BOOL",
+      "description": "\"Enable JTAG debug interface\""
+    }
+  ],
+  "vpi": { "src_files": [ "jtag_vpi.c" ] }
+}

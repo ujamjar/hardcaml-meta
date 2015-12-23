@@ -1,0 +1,8 @@
+{
+  "core_name": "verilog_utils",
+  "version": "1.0.0",
+  "description": "Verilog utility functions",
+  "depends": [],
+  "verilog_files": { "include_files": [ "verilog_utils.vh" ] },
+  "provider": "NO_PROVIDER"
+}

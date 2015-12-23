@@ -1,0 +1,15 @@
+{
+  "core_name": "mt48lc16m16a2",
+  "version": "1.0.0",
+  "description": "Micron 256Mb SDRAM Verilog model",
+  "depends": [],
+  "verilog_files": {
+    "src_files": [ "mt48lc16m16a2.v", "mt48lc16m16a2_wrapper.v" ]
+  },
+  "provider": [
+    "ZIP",
+    "http://www.micron.com/~/media/Documents/Products/Sim%%20Model/DRAM/DRAM/4012mt48lc16m16a2.zip"
+  ],
+  "modelsim": { "depend": [ "elf-loader", "wiredelay" ] },
+  "icarus": { "depend": [ "elf-loader", "wiredelay" ] }
+}

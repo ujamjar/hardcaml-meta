@@ -1,0 +1,33 @@
+{
+  "core_name": "fifo-1.0",
+  "version": "1.0.0",
+  "description": "Generic FIFO",
+  "depends": [ "vlog_tb_utils" ],
+  "verilog_files": {
+    "src_files": [
+      "rtl/verilog/simple_dpram_sclk.v", "rtl/verilog/fifo.v",
+      "rtl/verilog/fifo_fwft_adapter.v", "rtl/verilog/fifo_fwft.v",
+      "rtl/verilog/dual_clock_fifo.v"
+    ],
+    "tb_private_src_files": [ "bench/fifo_tb.v" ],
+    "tb_src_files": [ "bench/fifo_reader.v", "bench/fifo_writer.v" ]
+  },
+  "testbench": "fifo_tb",
+  "provider": [
+    "GITHUB",
+    { "user": "olofk", "repo": "fifo", "version": "v1.0" }
+  ],
+  "supported_simulators": [ "ICARUS", "MODELSIM" ],
+  "plusargs": [
+    {
+      "name": "read_rate",
+      "arg_type": "STR",
+      "description": "FIFO read rate"
+    },
+    {
+      "name": "write_rate",
+      "arg_type": "STR",
+      "description": "FIFO write rate"
+    }
+  ]
+}

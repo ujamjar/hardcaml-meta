@@ -1,0 +1,11 @@
+{
+  "core_name": "uart16550_model",
+  "version": "1.0.0",
+  "description": "Simulation model for uart16550",
+  "depends": [],
+  "verilog_files": {
+    "src_files": [ "wb_uart_wrapper.v" ],
+    "tb_src_files": [ "uart16550_model.v" ]
+  },
+  "provider": "NO_PROVIDER"
+}
