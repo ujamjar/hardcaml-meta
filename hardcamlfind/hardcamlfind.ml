@@ -42,32 +42,75 @@ let information copts list =
     No_error
   end
 
-let query copts package 
-  name version descr depends
-  vlog_files vlog_include_files vlog_include_dirs
-  vhdl_files = 
+let query_opts = 
+  let open Cores_t in
+  let px x = if x<>"" then printf "%s\n" x in
+  let pl l = if l<>[] then printf "%s\n" (String.concat " " l) in
+  let opt x f = match x with None -> () | Some(x) -> f x in
+  let supp_sim = function `MODELSIM -> "modelsim" | `ICARUS -> "icaruse" in
+  [
+    `name, ("name", "Core name.", fun core -> px core.core_name);
+    `descr, ("description", "Core description.", fun core -> px core.description);
+    `version, ("version", "Core version.", fun core -> px core.version);
+    `depends, ("depends", "Dependancies.", fun core -> pl core.depends);
+    `patches, ("patches", "List of patch files.", fun core -> opt core.patches pl);
+
+    `vlog_src_files, ("verilog-source", "List of verilog source files.", 
+      fun core -> opt core.verilog_files (fun v -> pl v.src_files));
+    `vlog_include_files, ("verilog-include-files", "List of verilog include files.", 
+      fun core -> opt core.verilog_files (fun v -> pl v.include_files));
+    `vlog_include_dirs, ("verilog-include-dirs", "Llist of verilog include directories.",
+      fun core -> pl (Cores.get_verilog_include_dirs core));
+
+    `vhdl_src_files, ("vhdl-source", "List of VHDL source files.", 
+      fun core -> opt core.vhdl_files (fun v -> pl v.src_files));
+
+    `testbench, ("testbench", "Testbench file", fun core -> opt core.testbench px);
+    `supported_simulators, ("supported-simulators", "List of supported simulators.", 
+      fun core -> opt core.supported_simulators (fun x -> pl (List.map supp_sim x)));
+
+    `modelsim_depend, ("modelsim-depend", "?", 
+      (fun core -> opt core.modelsim (fun x -> pl x.depend)));
+    `modelsim_vsim_opts, ("modelsim-vsim-opts", "?", 
+      (fun core -> opt core.modelsim (fun x -> pl x.vsim_options)));
+    `modelsim_vlog_opts, ("modelsim-vlog-opts", "?", 
+      (fun core -> opt core.modelsim (fun x -> pl x.vlog_options)));
+
+    `icarus_depend, ("icarus-depend", "?", 
+      (fun core -> opt core.icarus (fun x -> pl x.depend)));
+
+    (* plus args? *)
+
+    `vpi_src_files, ("vpi-source", "?", 
+      fun core -> opt core.vpi (fun x -> pl x.src_files));
+    `vpi_include_files, ("vpi-include-files", "?", 
+      fun core -> opt core.vpi (fun x -> pl x.include_files));
+    `vpi_libs, ("vpi-libs", "?", 
+      fun core -> opt core.vpi (fun x -> pl x.libs));
+
+    `verilator_src_type, ("verilator-source-type", "?",
+      fun core -> opt core.verilator (fun x -> px x.source_type));
+    `verilator_include_files, ("verilator-include-files", "?",
+      fun core -> opt core.verilator (fun x -> pl x.include_files));
+    `verilator_src_files, ("verilator-source-files", "?",
+      fun core -> opt core.verilator (fun x -> pl x.src_files));
+    `verilator_libs, ("verilator-libs", "?",
+      fun core -> opt core.verilator (fun x -> pl x.libs));
+
+    `pre_build_scripts, ("pre-build-scripts", "List of pre-build scripts", 
+      fun core -> opt core.pre_build_scripts pl);
+  ]
+
+let query copts package arg = 
   let fname = core_file_name copts.meta_path package in
-  let px c x = if c && x<>"" then printf "%s\n" x in
-  let pl c l = if c && l<>[] then printf "%s\n" (String.concat " " l) in
-  try
-    let c = Cores.load_core fname in
-    let open Cores_t in
-    let () = px name c.core_name in
-    let () = px version c.version in
-    let () = px descr c.description in
-    let () = pl depends c.depends in
-    let () = match c.verilog_files with None -> () 
-      | Some(x) -> pl vlog_files x.src_files 
-    in
-    let () = match c.verilog_files with | None -> () 
-      | Some(x) -> pl vlog_include_files x.include_files 
-    in
-    let () = pl vlog_include_dirs (Cores.get_verilog_include_dirs c) in
-    let () = match c.vhdl_files with None -> () 
-      | Some(x) -> pl vhdl_files x.src_files 
-    in
+  match Cores.load_core fname with
+  | core ->
+    let dump_json core = printf "%s\n" (Yojson.Basic.prettify (Cores_j.string_of_core core)) in
+    let (_,_,fn) = try List.assoc arg query_opts with _ -> "","",dump_json in
+    let () = fn core in
     No_error
-  with _ -> Error("Core file '" ^ fname ^ "' could not be loaded")
+  | exception _ ->
+    Error("Core file '" ^ fname ^ "' could not be loaded")
 
 let help copts man_format cmds topic = 
   match topic with
@@ -126,33 +169,21 @@ let information_cmd =
   Term.(const information $ copts_t $ lister),
   Term.info "info" ~sdocs:copts_sect ~doc ~man
 
-let query_cmd =
-  let flag arg doc = Arg.(value & flag & info [arg] ~doc) in
-
-  let cname = flag "name" "Core name" in 
-  let version = flag "version" "Core version" in
-  let descr = flag "description" "Core description" in
-  let depends = flag "depends" "Core dependancies" in
-
-  let vlog_files = flag "verilog" "List of Verilog source files" in
-  let vlog_include_files = flag "verilog-include-files" "List of Verilog include files" in
-  let vlog_include_dirs = flag "verilog-include-dirs" "List of Verilog include directories" in
-  let vhdl_files = flag "vhdl" "List of VHDL source files" in
-
+let query_cmd = 
   let package = 
     let doc = "The package to query." in
     Arg.(required & pos 0 (some string) None & info [] ~docv:"PACKAGE" ~doc)
+  in
+  let flags = 
+    Arg.(value & vflag `none 
+          (List.map (fun (arg,(cmd,doc,_)) -> arg, info [cmd] ~doc) query_opts) )
   in
   let doc = "query metadata" in
   let man =
     [`S "DESCRIPTION";
      `P "Query a package for metadata"] @ help_secs
   in
-  Term.(const query $ copts_t $ package $
-    cname $ version $ descr $ depends $ 
-    vlog_files $ vlog_include_files $ vlog_include_dirs $ 
-    vhdl_files 
-  ),
+  Term.(const query $ copts_t $ package $ flags),
   Term.info "query" ~doc ~sdocs:copts_sect ~man
 
 let help_cmd =
