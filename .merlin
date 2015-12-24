@@ -4,3 +4,4 @@ B _build/**
 PKG hardcaml
 PKG atdgen
 PKG yojson
+PKG cmdliner

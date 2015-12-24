@@ -20,7 +20,7 @@ Library HardCamlMeta
   XMETARequires: atdgen
 
 Flag converter
-  Description: build init file conversion tools
+  Description: build ini file conversion tools
   Default:     false
 
 Executable ini2core
@@ -31,6 +31,15 @@ Executable ini2core
   CompiledObject:     best
   Install:            false
   BuildDepends:       atdgen, hardcaml-meta
+
+Executable hardcamlfind
+  Path:               hardcamlfind
+  MainIs:             hardcamlfind.ml
+  Build:              true
+  Custom:             true
+  CompiledObject:     best
+  Install:            false
+  BuildDepends:       atdgen, cmdliner, hardcaml-meta
 
 SourceRepository master
   Type:     git

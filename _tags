@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 5029ebb6ddb95cb8127ce31262b912ec)
+# DO NOT EDIT (digest: 81afb31594e3e0762d86bbba43eea098)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -26,4 +26,12 @@ true: annot, bin_annot
 <ini2core/*.ml{,i,y}>: pkg_atdgen
 <ini2core/*.ml{,i,y}>: use_HardCamlMeta
 <ini2core/ini2core.{native,byte}>: custom
+# Executable hardcamlfind
+<hardcamlfind/hardcamlfind.{native,byte}>: pkg_atdgen
+<hardcamlfind/hardcamlfind.{native,byte}>: pkg_cmdliner
+<hardcamlfind/hardcamlfind.{native,byte}>: use_HardCamlMeta
+<hardcamlfind/*.ml{,i,y}>: pkg_atdgen
+<hardcamlfind/*.ml{,i,y}>: pkg_cmdliner
+<hardcamlfind/*.ml{,i,y}>: use_HardCamlMeta
+<hardcamlfind/hardcamlfind.{native,byte}>: custom
 # OASIS_STOP
