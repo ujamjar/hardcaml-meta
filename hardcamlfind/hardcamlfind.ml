@@ -65,6 +65,8 @@ let query_opts =
     `vhdl_src_files, ("vhdl-source", "List of VHDL source files.", 
       fun core -> opt core.vhdl_files (fun v -> pl v.src_files));
 
+    (* provider? *)
+    
     `testbench, ("testbench", "Testbench file", fun core -> opt core.testbench px);
     `supported_simulators, ("supported-simulators", "List of supported simulators.", 
       fun core -> opt core.supported_simulators (fun x -> pl (List.map supp_sim x)));
@@ -109,6 +111,26 @@ let query copts package arg =
     let (_,_,fn) = try List.assoc arg query_opts with _ -> "","",dump_json in
     let () = fn core in
     No_error
+  | exception _ ->
+    Error("Core file '" ^ fname ^ "' could not be loaded")
+
+let script_opts = [
+  `yosys2json, ("yosys-to-json", "Convert core to json with yosys", Cores.yosys_to_json);
+  `opam, ("opam", "Create opam file", Cores.opam);
+]
+
+let script copts package fout arg = 
+  let fname = core_file_name copts.meta_path package in
+  match Cores.load_core fname with
+  | core -> begin
+    match List.assoc arg script_opts with
+    | (_,_,fn) -> begin
+      match open_out fout with
+      | fout -> fn core fout; close_out fout; No_error
+      | exception _ -> Error("Could not open output file")
+    end
+    | exception Not_found -> Error("No script argument provided")
+  end
   | exception _ ->
     Error("Core file '" ^ fname ^ "' could not be loaded")
 
@@ -205,7 +227,28 @@ let default_cmd =
   Term.(ret (const (fun _ -> `Help (`Pager, None)) $ copts_t)),
   Term.info "hardcamlfind" ~version:"0.1.0" ~sdocs:copts_sect ~doc ~man
 
-let cmds = [information_cmd; query_cmd; help_cmd]
+let scripts_cmd = 
+  let package = 
+    let doc = "The package to generate a script for." in
+    Arg.(required & pos 0 (some string) None & info [] ~docv:"PACKAGE" ~doc)
+  in
+  let fout = 
+    let doc = "Output script name" in
+    Arg.(required & pos 1 (some string) None & info [] ~docv:"FILENAME" ~doc)
+  in
+  let flags = 
+    Arg.(value & vflag `none 
+          (List.map (fun (arg,(cmd,doc,_)) -> arg, info [cmd] ~doc) script_opts) )
+  in
+  let doc = "script generation" in
+  let man = 
+    [`S "DESCRIPTION";
+     `P "Generate various backend tool scripts"] @ help_secs
+  in
+  Term.(const script $ copts_t $ package $ fout $ flags),
+  Term.info "script" ~doc ~sdocs:copts_sect ~man
+
+let cmds = [information_cmd; query_cmd; scripts_cmd; help_cmd]
 
 let () = 
   match Term.eval_choice default_cmd cmds with
