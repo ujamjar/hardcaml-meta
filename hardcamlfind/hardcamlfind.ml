@@ -5,7 +5,7 @@ type ret =
   | No_error
   | Error of string
 
-let default_meta_path = "./cores"
+let default_meta_path = ".hardcamlfind-metadata"
 
 let core_file_name path core = Filename.concat path (core ^ ".json") 
 
@@ -134,6 +134,20 @@ let script copts package fout arg =
   | exception _ ->
     Error("Core file '" ^ fname ^ "' could not be loaded")
 
+let install copts package install_path = 
+  if not (Filename.check_suffix package ".json") then Error("Package not a json file")
+  else
+    let package_name = Filename.basename package in
+    match Cores.load_core package with
+    | core -> begin
+      let file_out_name = Filename.concat copts.meta_path package_name in
+      match Cores.write_core file_out_name { core with Cores_t.install_path=Some(install_path) } with
+      | () -> No_error
+      | exception _ -> Error("Failed to install metadata file")
+    end
+    | exception _ ->
+      Error("Core file '" ^ package ^ "' could not be loaded")
+
 let help copts man_format cmds topic = 
   match topic with
   | None -> `Help (`Pager, None) (* help about the program. *)
@@ -248,7 +262,30 @@ let scripts_cmd =
   Term.(const script $ copts_t $ package $ fout $ flags),
   Term.info "script" ~doc ~sdocs:copts_sect ~man
 
-let cmds = [information_cmd; query_cmd; scripts_cmd; help_cmd]
+let install_cmd = 
+  let package = 
+    let doc = "The package to install." in
+    Arg.(required & pos 0 (some string) None & info [] ~docv:"PACKAGE_FILE" ~doc)
+  in
+  let install_path = 
+    let doc = "Path to the installed package data." in
+    Arg.(required & pos 1 (some string) None & info [] ~docv:"PATH" ~doc)
+  in
+  let doc = "install metadata" in
+  let man = 
+    [`S "DESCRIPTION";
+     `P "Install package metadata.";
+     `P "This command will install the metadata given in PACKAGE_FILE to 
+the metadata path (--meta-path).  It does not install the package itself
+rather it will add a link in the metadata to the installation path given
+as the 2nd argument.";
+    ] 
+    @ help_secs
+  in
+  Term.(const install $ copts_t $ package $ install_path),
+  Term.info "install" ~doc ~sdocs:copts_sect ~man
+
+let cmds = [information_cmd; query_cmd; scripts_cmd; install_cmd; help_cmd]
 
 let () = 
   match Term.eval_choice default_cmd cmds with

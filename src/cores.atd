@@ -80,6 +80,9 @@ type core = {
   (* package dependancies *)
   depends : string list;
 
+  (* path the package is installed into *)
+  ?install_path : string option;
+
   (* patches *)
   ?patches : string list option;
 

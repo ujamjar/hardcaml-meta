@@ -213,6 +213,7 @@ let core_of_ini c =
     version = "1.0.0";
     description = Inicores_t.(unquote c.main.description);
     depends = Inicores_t.(c.main.depend);
+    install_path = None;
     patches = optl Inicores_t.(c.main.patches);
     verilog_files = vlog_files Inicores_t.(c.verilog);
     vhdl_files = None; (* no vhdl in opencores?! *)

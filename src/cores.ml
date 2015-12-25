@@ -13,6 +13,11 @@ let load_core fname =
   let () = close_in file in
   json
 
+let write_core fname core = 
+  let file = open_out fname in
+  output_string file (Cores_j.string_of_core core);
+  close_out file
+
 let get_provider_string core =
   match core.provider with
   | `GITHUB gh -> begin

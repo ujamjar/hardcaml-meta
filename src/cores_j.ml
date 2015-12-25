@@ -59,6 +59,7 @@ type core = Cores_t.core = {
   version: string;
   description: string;
   depends: string list;
+  install_path: string option;
   patches: string list option;
   verilog_files: hdl_files option;
   vhdl_files: hdl_files option;
@@ -3571,6 +3572,17 @@ let write_core : _ -> core -> _ = (
       write__1
     )
       ob x.depends;
+    (match x.install_path with None -> () | Some x ->
+      if !is_first then
+        is_first := false
+      else
+        Bi_outbuf.add_char ob ',';
+      Bi_outbuf.add_string ob "\"install_path\":";
+      (
+        Yojson.Safe.write_string
+      )
+        ob x;
+    );
     (match x.patches with None -> () | Some x ->
       if !is_first then
         is_first := false
@@ -3715,6 +3727,7 @@ let read_core = (
     let field_version = ref (Obj.magic 0.0) in
     let field_description = ref (Obj.magic 0.0) in
     let field_depends = ref (Obj.magic 0.0) in
+    let field_install_path = ref (None) in
     let field_patches = ref (None) in
     let field_verilog_files = ref (None) in
     let field_vhdl_files = ref (None) in
@@ -3739,18 +3752,18 @@ let read_core = (
           match len with
             | 3 -> (
                 if String.unsafe_get s pos = 'v' && String.unsafe_get s (pos+1) = 'p' && String.unsafe_get s (pos+2) = 'i' then (
-                  13
+                  14
                 )
                 else (
-                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                 )
               )
             | 6 -> (
                 if String.unsafe_get s pos = 'i' && String.unsafe_get s (pos+1) = 'c' && String.unsafe_get s (pos+2) = 'a' && String.unsafe_get s (pos+3) = 'r' && String.unsafe_get s (pos+4) = 'u' && String.unsafe_get s (pos+5) = 's' then (
-                  11
+                  12
                 )
                 else (
-                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                 )
               )
             | 7 -> (
@@ -3760,15 +3773,15 @@ let read_core = (
                         3
                       )
                       else (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                     )
                   | 'p' -> (
                       if String.unsafe_get s (pos+1) = 'a' && String.unsafe_get s (pos+2) = 't' && String.unsafe_get s (pos+3) = 'c' && String.unsafe_get s (pos+4) = 'h' && String.unsafe_get s (pos+5) = 'e' && String.unsafe_get s (pos+6) = 's' then (
-                        4
+                        5
                       )
                       else (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                     )
                   | 'v' -> (
@@ -3776,47 +3789,47 @@ let read_core = (
                         1
                       )
                       else (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                     )
                   | _ -> (
-                      (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                      (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                     )
               )
             | 8 -> (
                 match String.unsafe_get s pos with
                   | 'm' -> (
                       if String.unsafe_get s (pos+1) = 'o' && String.unsafe_get s (pos+2) = 'd' && String.unsafe_get s (pos+3) = 'e' && String.unsafe_get s (pos+4) = 'l' && String.unsafe_get s (pos+5) = 's' && String.unsafe_get s (pos+6) = 'i' && String.unsafe_get s (pos+7) = 'm' then (
-                        10
+                        11
                       )
                       else (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                     )
                   | 'p' -> (
                       match String.unsafe_get s (pos+1) with
                         | 'l' -> (
                             if String.unsafe_get s (pos+2) = 'u' && String.unsafe_get s (pos+3) = 's' && String.unsafe_get s (pos+4) = 'a' && String.unsafe_get s (pos+5) = 'r' && String.unsafe_get s (pos+6) = 'g' && String.unsafe_get s (pos+7) = 's' then (
-                              12
+                              13
                             )
                             else (
-                              (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                              (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                             )
                           )
                         | 'r' -> (
                             if String.unsafe_get s (pos+2) = 'o' && String.unsafe_get s (pos+3) = 'v' && String.unsafe_get s (pos+4) = 'i' && String.unsafe_get s (pos+5) = 'd' && String.unsafe_get s (pos+6) = 'e' && String.unsafe_get s (pos+7) = 'r' then (
-                              8
+                              9
                             )
                             else (
-                              (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                              (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                             )
                           )
                         | _ -> (
-                            (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                            (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                           )
                     )
                   | _ -> (
-                      (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                      (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                     )
               )
             | 9 -> (
@@ -3826,35 +3839,35 @@ let read_core = (
                         0
                       )
                       else (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                     )
                   | 't' -> (
                       if String.unsafe_get s (pos+1) = 'e' && String.unsafe_get s (pos+2) = 's' && String.unsafe_get s (pos+3) = 't' && String.unsafe_get s (pos+4) = 'b' && String.unsafe_get s (pos+5) = 'e' && String.unsafe_get s (pos+6) = 'n' && String.unsafe_get s (pos+7) = 'c' && String.unsafe_get s (pos+8) = 'h' then (
-                        7
+                        8
                       )
                       else (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                     )
                   | 'v' -> (
                       if String.unsafe_get s (pos+1) = 'e' && String.unsafe_get s (pos+2) = 'r' && String.unsafe_get s (pos+3) = 'i' && String.unsafe_get s (pos+4) = 'l' && String.unsafe_get s (pos+5) = 'a' && String.unsafe_get s (pos+6) = 't' && String.unsafe_get s (pos+7) = 'o' && String.unsafe_get s (pos+8) = 'r' then (
-                        14
+                        15
                       )
                       else (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                     )
                   | _ -> (
-                      (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                      (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                     )
               )
             | 10 -> (
                 if String.unsafe_get s pos = 'v' && String.unsafe_get s (pos+1) = 'h' && String.unsafe_get s (pos+2) = 'd' && String.unsafe_get s (pos+3) = 'l' && String.unsafe_get s (pos+4) = '_' && String.unsafe_get s (pos+5) = 'f' && String.unsafe_get s (pos+6) = 'i' && String.unsafe_get s (pos+7) = 'l' && String.unsafe_get s (pos+8) = 'e' && String.unsafe_get s (pos+9) = 's' then (
-                  6
+                  7
                 )
                 else (
-                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                 )
               )
             | 11 -> (
@@ -3862,35 +3875,43 @@ let read_core = (
                   2
                 )
                 else (
-                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
+                )
+              )
+            | 12 -> (
+                if String.unsafe_get s pos = 'i' && String.unsafe_get s (pos+1) = 'n' && String.unsafe_get s (pos+2) = 's' && String.unsafe_get s (pos+3) = 't' && String.unsafe_get s (pos+4) = 'a' && String.unsafe_get s (pos+5) = 'l' && String.unsafe_get s (pos+6) = 'l' && String.unsafe_get s (pos+7) = '_' && String.unsafe_get s (pos+8) = 'p' && String.unsafe_get s (pos+9) = 'a' && String.unsafe_get s (pos+10) = 't' && String.unsafe_get s (pos+11) = 'h' then (
+                  4
+                )
+                else (
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                 )
               )
             | 13 -> (
                 if String.unsafe_get s pos = 'v' && String.unsafe_get s (pos+1) = 'e' && String.unsafe_get s (pos+2) = 'r' && String.unsafe_get s (pos+3) = 'i' && String.unsafe_get s (pos+4) = 'l' && String.unsafe_get s (pos+5) = 'o' && String.unsafe_get s (pos+6) = 'g' && String.unsafe_get s (pos+7) = '_' && String.unsafe_get s (pos+8) = 'f' && String.unsafe_get s (pos+9) = 'i' && String.unsafe_get s (pos+10) = 'l' && String.unsafe_get s (pos+11) = 'e' && String.unsafe_get s (pos+12) = 's' then (
-                  5
+                  6
                 )
                 else (
-                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                 )
               )
             | 17 -> (
                 if String.unsafe_get s pos = 'p' && String.unsafe_get s (pos+1) = 'r' && String.unsafe_get s (pos+2) = 'e' && String.unsafe_get s (pos+3) = '_' && String.unsafe_get s (pos+4) = 'b' && String.unsafe_get s (pos+5) = 'u' && String.unsafe_get s (pos+6) = 'i' && String.unsafe_get s (pos+7) = 'l' && String.unsafe_get s (pos+8) = 'd' && String.unsafe_get s (pos+9) = '_' && String.unsafe_get s (pos+10) = 's' && String.unsafe_get s (pos+11) = 'c' && String.unsafe_get s (pos+12) = 'r' && String.unsafe_get s (pos+13) = 'i' && String.unsafe_get s (pos+14) = 'p' && String.unsafe_get s (pos+15) = 't' && String.unsafe_get s (pos+16) = 's' then (
-                  15
+                  16
                 )
                 else (
-                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                 )
               )
             | 20 -> (
                 if String.unsafe_get s pos = 's' && String.unsafe_get s (pos+1) = 'u' && String.unsafe_get s (pos+2) = 'p' && String.unsafe_get s (pos+3) = 'p' && String.unsafe_get s (pos+4) = 'o' && String.unsafe_get s (pos+5) = 'r' && String.unsafe_get s (pos+6) = 't' && String.unsafe_get s (pos+7) = 'e' && String.unsafe_get s (pos+8) = 'd' && String.unsafe_get s (pos+9) = '_' && String.unsafe_get s (pos+10) = 's' && String.unsafe_get s (pos+11) = 'i' && String.unsafe_get s (pos+12) = 'm' && String.unsafe_get s (pos+13) = 'u' && String.unsafe_get s (pos+14) = 'l' && String.unsafe_get s (pos+15) = 'a' && String.unsafe_get s (pos+16) = 't' && String.unsafe_get s (pos+17) = 'o' && String.unsafe_get s (pos+18) = 'r' && String.unsafe_get s (pos+19) = 's' then (
-                  9
+                  10
                 )
                 else (
-                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                 )
               )
             | _ -> (
-                (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
               )
       in
       let i = Yojson.Safe.map_ident p f lb in
@@ -3927,6 +3948,16 @@ let read_core = (
             bits0 := !bits0 lor 0x8;
           | 4 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
+              field_install_path := (
+                Some (
+                  (
+                    Ag_oj_run.read_string
+                  ) p lb
+                )
+              );
+            )
+          | 5 ->
+            if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_patches := (
                 Some (
                   (
@@ -3935,7 +3966,7 @@ let read_core = (
                 )
               );
             )
-          | 5 ->
+          | 6 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_verilog_files := (
                 Some (
@@ -3945,7 +3976,7 @@ let read_core = (
                 )
               );
             )
-          | 6 ->
+          | 7 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_vhdl_files := (
                 Some (
@@ -3955,7 +3986,7 @@ let read_core = (
                 )
               );
             )
-          | 7 ->
+          | 8 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_testbench := (
                 Some (
@@ -3965,14 +3996,14 @@ let read_core = (
                 )
               );
             )
-          | 8 ->
+          | 9 ->
             field_provider := (
               (
                 read_provider
               ) p lb
             );
             bits0 := !bits0 lor 0x10;
-          | 9 ->
+          | 10 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_supported_simulators := (
                 Some (
@@ -3982,7 +4013,7 @@ let read_core = (
                 )
               );
             )
-          | 10 ->
+          | 11 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_modelsim := (
                 Some (
@@ -3992,7 +4023,7 @@ let read_core = (
                 )
               );
             )
-          | 11 ->
+          | 12 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_icarus := (
                 Some (
@@ -4002,7 +4033,7 @@ let read_core = (
                 )
               );
             )
-          | 12 ->
+          | 13 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_plusargs := (
                 Some (
@@ -4012,7 +4043,7 @@ let read_core = (
                 )
               );
             )
-          | 13 ->
+          | 14 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_vpi := (
                 Some (
@@ -4022,7 +4053,7 @@ let read_core = (
                 )
               );
             )
-          | 14 ->
+          | 15 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_verilator := (
                 Some (
@@ -4032,7 +4063,7 @@ let read_core = (
                 )
               );
             )
-          | 15 ->
+          | 16 ->
             if not (Yojson.Safe.read_null_if_possible p lb) then (
               field_pre_build_scripts := (
                 Some (
@@ -4057,18 +4088,18 @@ let read_core = (
             match len with
               | 3 -> (
                   if String.unsafe_get s pos = 'v' && String.unsafe_get s (pos+1) = 'p' && String.unsafe_get s (pos+2) = 'i' then (
-                    13
+                    14
                   )
                   else (
-                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                   )
                 )
               | 6 -> (
                   if String.unsafe_get s pos = 'i' && String.unsafe_get s (pos+1) = 'c' && String.unsafe_get s (pos+2) = 'a' && String.unsafe_get s (pos+3) = 'r' && String.unsafe_get s (pos+4) = 'u' && String.unsafe_get s (pos+5) = 's' then (
-                    11
+                    12
                   )
                   else (
-                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                   )
                 )
               | 7 -> (
@@ -4078,15 +4109,15 @@ let read_core = (
                           3
                         )
                         else (
-                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                         )
                       )
                     | 'p' -> (
                         if String.unsafe_get s (pos+1) = 'a' && String.unsafe_get s (pos+2) = 't' && String.unsafe_get s (pos+3) = 'c' && String.unsafe_get s (pos+4) = 'h' && String.unsafe_get s (pos+5) = 'e' && String.unsafe_get s (pos+6) = 's' then (
-                          4
+                          5
                         )
                         else (
-                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                         )
                       )
                     | 'v' -> (
@@ -4094,47 +4125,47 @@ let read_core = (
                           1
                         )
                         else (
-                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                         )
                       )
                     | _ -> (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                 )
               | 8 -> (
                   match String.unsafe_get s pos with
                     | 'm' -> (
                         if String.unsafe_get s (pos+1) = 'o' && String.unsafe_get s (pos+2) = 'd' && String.unsafe_get s (pos+3) = 'e' && String.unsafe_get s (pos+4) = 'l' && String.unsafe_get s (pos+5) = 's' && String.unsafe_get s (pos+6) = 'i' && String.unsafe_get s (pos+7) = 'm' then (
-                          10
+                          11
                         )
                         else (
-                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                         )
                       )
                     | 'p' -> (
                         match String.unsafe_get s (pos+1) with
                           | 'l' -> (
                               if String.unsafe_get s (pos+2) = 'u' && String.unsafe_get s (pos+3) = 's' && String.unsafe_get s (pos+4) = 'a' && String.unsafe_get s (pos+5) = 'r' && String.unsafe_get s (pos+6) = 'g' && String.unsafe_get s (pos+7) = 's' then (
-                                12
+                                13
                               )
                               else (
-                                (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                                (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                               )
                             )
                           | 'r' -> (
                               if String.unsafe_get s (pos+2) = 'o' && String.unsafe_get s (pos+3) = 'v' && String.unsafe_get s (pos+4) = 'i' && String.unsafe_get s (pos+5) = 'd' && String.unsafe_get s (pos+6) = 'e' && String.unsafe_get s (pos+7) = 'r' then (
-                                8
+                                9
                               )
                               else (
-                                (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                                (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                               )
                             )
                           | _ -> (
-                              (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                              (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                             )
                       )
                     | _ -> (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                 )
               | 9 -> (
@@ -4144,35 +4175,35 @@ let read_core = (
                           0
                         )
                         else (
-                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                         )
                       )
                     | 't' -> (
                         if String.unsafe_get s (pos+1) = 'e' && String.unsafe_get s (pos+2) = 's' && String.unsafe_get s (pos+3) = 't' && String.unsafe_get s (pos+4) = 'b' && String.unsafe_get s (pos+5) = 'e' && String.unsafe_get s (pos+6) = 'n' && String.unsafe_get s (pos+7) = 'c' && String.unsafe_get s (pos+8) = 'h' then (
-                          7
+                          8
                         )
                         else (
-                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                         )
                       )
                     | 'v' -> (
                         if String.unsafe_get s (pos+1) = 'e' && String.unsafe_get s (pos+2) = 'r' && String.unsafe_get s (pos+3) = 'i' && String.unsafe_get s (pos+4) = 'l' && String.unsafe_get s (pos+5) = 'a' && String.unsafe_get s (pos+6) = 't' && String.unsafe_get s (pos+7) = 'o' && String.unsafe_get s (pos+8) = 'r' then (
-                          14
+                          15
                         )
                         else (
-                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                          (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                         )
                       )
                     | _ -> (
-                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                        (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                       )
                 )
               | 10 -> (
                   if String.unsafe_get s pos = 'v' && String.unsafe_get s (pos+1) = 'h' && String.unsafe_get s (pos+2) = 'd' && String.unsafe_get s (pos+3) = 'l' && String.unsafe_get s (pos+4) = '_' && String.unsafe_get s (pos+5) = 'f' && String.unsafe_get s (pos+6) = 'i' && String.unsafe_get s (pos+7) = 'l' && String.unsafe_get s (pos+8) = 'e' && String.unsafe_get s (pos+9) = 's' then (
-                    6
+                    7
                   )
                   else (
-                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                   )
                 )
               | 11 -> (
@@ -4180,35 +4211,43 @@ let read_core = (
                     2
                   )
                   else (
-                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
+                  )
+                )
+              | 12 -> (
+                  if String.unsafe_get s pos = 'i' && String.unsafe_get s (pos+1) = 'n' && String.unsafe_get s (pos+2) = 's' && String.unsafe_get s (pos+3) = 't' && String.unsafe_get s (pos+4) = 'a' && String.unsafe_get s (pos+5) = 'l' && String.unsafe_get s (pos+6) = 'l' && String.unsafe_get s (pos+7) = '_' && String.unsafe_get s (pos+8) = 'p' && String.unsafe_get s (pos+9) = 'a' && String.unsafe_get s (pos+10) = 't' && String.unsafe_get s (pos+11) = 'h' then (
+                    4
+                  )
+                  else (
+                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                   )
                 )
               | 13 -> (
                   if String.unsafe_get s pos = 'v' && String.unsafe_get s (pos+1) = 'e' && String.unsafe_get s (pos+2) = 'r' && String.unsafe_get s (pos+3) = 'i' && String.unsafe_get s (pos+4) = 'l' && String.unsafe_get s (pos+5) = 'o' && String.unsafe_get s (pos+6) = 'g' && String.unsafe_get s (pos+7) = '_' && String.unsafe_get s (pos+8) = 'f' && String.unsafe_get s (pos+9) = 'i' && String.unsafe_get s (pos+10) = 'l' && String.unsafe_get s (pos+11) = 'e' && String.unsafe_get s (pos+12) = 's' then (
-                    5
+                    6
                   )
                   else (
-                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                   )
                 )
               | 17 -> (
                   if String.unsafe_get s pos = 'p' && String.unsafe_get s (pos+1) = 'r' && String.unsafe_get s (pos+2) = 'e' && String.unsafe_get s (pos+3) = '_' && String.unsafe_get s (pos+4) = 'b' && String.unsafe_get s (pos+5) = 'u' && String.unsafe_get s (pos+6) = 'i' && String.unsafe_get s (pos+7) = 'l' && String.unsafe_get s (pos+8) = 'd' && String.unsafe_get s (pos+9) = '_' && String.unsafe_get s (pos+10) = 's' && String.unsafe_get s (pos+11) = 'c' && String.unsafe_get s (pos+12) = 'r' && String.unsafe_get s (pos+13) = 'i' && String.unsafe_get s (pos+14) = 'p' && String.unsafe_get s (pos+15) = 't' && String.unsafe_get s (pos+16) = 's' then (
-                    15
+                    16
                   )
                   else (
-                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                   )
                 )
               | 20 -> (
                   if String.unsafe_get s pos = 's' && String.unsafe_get s (pos+1) = 'u' && String.unsafe_get s (pos+2) = 'p' && String.unsafe_get s (pos+3) = 'p' && String.unsafe_get s (pos+4) = 'o' && String.unsafe_get s (pos+5) = 'r' && String.unsafe_get s (pos+6) = 't' && String.unsafe_get s (pos+7) = 'e' && String.unsafe_get s (pos+8) = 'd' && String.unsafe_get s (pos+9) = '_' && String.unsafe_get s (pos+10) = 's' && String.unsafe_get s (pos+11) = 'i' && String.unsafe_get s (pos+12) = 'm' && String.unsafe_get s (pos+13) = 'u' && String.unsafe_get s (pos+14) = 'l' && String.unsafe_get s (pos+15) = 'a' && String.unsafe_get s (pos+16) = 't' && String.unsafe_get s (pos+17) = 'o' && String.unsafe_get s (pos+18) = 'r' && String.unsafe_get s (pos+19) = 's' then (
-                    9
+                    10
                   )
                   else (
-                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                    (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                   )
                 )
               | _ -> (
-                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-994" (String.sub s pos len); -1
+                  (!Ag_util.Json.unknown_field_handler) "File \"src/cores.atd\", line 70, characters 12-1071" (String.sub s pos len); -1
                 )
         in
         let i = Yojson.Safe.map_ident p f lb in
@@ -4245,6 +4284,16 @@ let read_core = (
               bits0 := !bits0 lor 0x8;
             | 4 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
+                field_install_path := (
+                  Some (
+                    (
+                      Ag_oj_run.read_string
+                    ) p lb
+                  )
+                );
+              )
+            | 5 ->
+              if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_patches := (
                   Some (
                     (
@@ -4253,7 +4302,7 @@ let read_core = (
                   )
                 );
               )
-            | 5 ->
+            | 6 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_verilog_files := (
                   Some (
@@ -4263,7 +4312,7 @@ let read_core = (
                   )
                 );
               )
-            | 6 ->
+            | 7 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_vhdl_files := (
                   Some (
@@ -4273,7 +4322,7 @@ let read_core = (
                   )
                 );
               )
-            | 7 ->
+            | 8 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_testbench := (
                   Some (
@@ -4283,14 +4332,14 @@ let read_core = (
                   )
                 );
               )
-            | 8 ->
+            | 9 ->
               field_provider := (
                 (
                   read_provider
                 ) p lb
               );
               bits0 := !bits0 lor 0x10;
-            | 9 ->
+            | 10 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_supported_simulators := (
                   Some (
@@ -4300,7 +4349,7 @@ let read_core = (
                   )
                 );
               )
-            | 10 ->
+            | 11 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_modelsim := (
                   Some (
@@ -4310,7 +4359,7 @@ let read_core = (
                   )
                 );
               )
-            | 11 ->
+            | 12 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_icarus := (
                   Some (
@@ -4320,7 +4369,7 @@ let read_core = (
                   )
                 );
               )
-            | 12 ->
+            | 13 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_plusargs := (
                   Some (
@@ -4330,7 +4379,7 @@ let read_core = (
                   )
                 );
               )
-            | 13 ->
+            | 14 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_vpi := (
                   Some (
@@ -4340,7 +4389,7 @@ let read_core = (
                   )
                 );
               )
-            | 14 ->
+            | 15 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_verilator := (
                   Some (
@@ -4350,7 +4399,7 @@ let read_core = (
                   )
                 );
               )
-            | 15 ->
+            | 16 ->
               if not (Yojson.Safe.read_null_if_possible p lb) then (
                 field_pre_build_scripts := (
                   Some (
@@ -4374,6 +4423,7 @@ let read_core = (
             version = !field_version;
             description = !field_description;
             depends = !field_depends;
+            install_path = !field_install_path;
             patches = !field_patches;
             verilog_files = !field_verilog_files;
             vhdl_files = !field_vhdl_files;

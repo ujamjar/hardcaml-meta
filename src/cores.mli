@@ -4,6 +4,8 @@ open Cores_t
 
 val load_core : string -> core
 
+val write_core : string -> core -> unit
+
 val get_provider_string : core -> string option
 
 val get_verilog_include_dirs : core -> string list

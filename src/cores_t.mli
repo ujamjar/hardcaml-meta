@@ -61,6 +61,7 @@ type core = {
   version: string;
   description: string;
   depends: string list;
+  install_path: string option;
   patches: string list option;
   verilog_files: hdl_files option;
   vhdl_files: hdl_files option;
